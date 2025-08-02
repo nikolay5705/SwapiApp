@@ -34,7 +34,7 @@ class Program
             {
                 if (category == "people")
                 {
-                    var data = await _requestService.GetAsync<Person>(url);
+                    var data = await _requestService.GetAsync<CollectionResponse<Person>>(url);
 
                     if (data?.Results != null)
                     {
@@ -46,7 +46,7 @@ class Program
                 }
                 else if (category == "planets")
                 {
-                    var data = await _requestService.GetAsync<Planet>(url);
+                    var data = await _requestService.GetAsync<CollectionResponse<Planet>>(url);
 
                     if (data?.Results != null)
                     {
@@ -58,7 +58,7 @@ class Program
                 }
                 else if (category == "starships")
                 {
-                    var data = await _requestService.GetAsync<StarShip>(url);
+                    var data = await _requestService.GetAsync<CollectionResponse<StarShip>>(url);
 
                     if (data?.Results != null)
                     {

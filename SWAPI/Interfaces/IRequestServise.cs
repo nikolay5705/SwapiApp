@@ -5,7 +5,7 @@ namespace SWAPI.Interfaces
     public interface IRequestService
     {
         
-        public Task<CollectionResponse<T>> GetAsync<T>(string url);
+        public Task<T> GetAsync<T>(string url);
     }
 
 }

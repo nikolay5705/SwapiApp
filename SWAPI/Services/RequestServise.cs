@@ -7,7 +7,7 @@ namespace SWAPI.Services
     public class RequestService : IRequestService
     {
         private readonly HttpClient _httpClient = new HttpClient();
-        public async Task<CollectionResponse<T>> GetAsync<T>(string url)
+        public async Task<T> GetAsync<T>(string url)
         {
             var JsonOption = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
 
@@ -15,10 +15,8 @@ namespace SWAPI.Services
             response.EnsureSuccessStatusCode();
 
             string responseBody = await response.Content.ReadAsStringAsync();
-            var data = JsonSerializer.Deserialize<CollectionResponse<T>>(responseBody, JsonOption);
+            var data = JsonSerializer.Deserialize<T>(responseBody, JsonOption);
             return data;
         }
-
-
     }
 }
