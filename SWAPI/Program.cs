@@ -1,15 +1,14 @@
 ﻿using System.Text.Json;
-using SWAPI.ApiResponses;
 using SWAPI.ValidationData;
 using SWAPI.SwapiModels;
+using SWAPI.Interfaces;
 using SWAPI.Services;
 
 class Program
 {
+    private static readonly IRequestService _requestService = new RequestService();
     static async Task Main()
     {
-        using HttpClient client = new HttpClient();
-
         while (true)
         {
             //Get category (people, planets, starships) or 'exit' to finish the program
@@ -33,11 +32,9 @@ class Program
 
             try
             {
-                RequestService requestService = new RequestService();
-
                 if (category == "people")
                 {
-                    var data = await requestService.GetAsync<Person>(url);
+                    var data = await _requestService.GetAsync<Person>(url);
 
                     if (data?.Results != null)
                     {
@@ -49,7 +46,7 @@ class Program
                 }
                 else if (category == "planets")
                 {
-                    var data = await requestService.GetAsync<Planet>(url);
+                    var data = await _requestService.GetAsync<Planet>(url);
 
                     if (data?.Results != null)
                     {
@@ -61,7 +58,7 @@ class Program
                 }
                 else if (category == "starships")
                 {
-                    var data = await requestService.GetAsync<StarShip>(url);
+                    var data = await _requestService.GetAsync<StarShip>(url);
 
                     if (data?.Results != null)
                     {

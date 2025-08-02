@@ -1,8 +1,8 @@
 using SWAPI.SwapiModels;
 
-namespace SWAPI.ApiResponses
+namespace SWAPI.SwapiModels
 {
-    public class ApiResponse<T> 
+    public class CollectionResponse<T> 
     {
         public List<T> Results = new List<T>();
     }

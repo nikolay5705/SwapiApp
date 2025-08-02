@@ -1,10 +1,11 @@
-using SWAPI.ApiResponses;
+using SWAPI.SwapiModels;
 
 namespace SWAPI.Interfaces
 {
     public interface IRequestService
     {
-        public Task<ApiResponse<T>> GetAsync<T>(string url);
+        
+        public Task<CollectionResponse<T>> GetAsync<T>(string url);
     }
 
 }
