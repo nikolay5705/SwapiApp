@@ -10,7 +10,7 @@ namespace SWAPI.ValidationData
                 return false;
         }
 
-        public static bool ContainsAnyCategory(string? name)
+        public static bool IsUnknownCategory(string? name)
         {
             if (name != "people" && name != "planets" && name != "starships")
                 return true;

@@ -1,6 +1,8 @@
 ﻿using System.Text.Json;
 using SWAPI.ApiResponses;
 using SWAPI.ValidationData;
+using SWAPI.SwapiModels;
+
 
 class Program
 {
@@ -20,14 +22,14 @@ class Program
                 break;
             }
 
-            if (ValidationData.ContainsAnyCategory(category))
+            if (ValidationData.IsUnknownCategory(category))
             {
                 Console.WriteLine("> Incorrect category");
                 continue;
             }
             string url = $"https://swapi.info/api/{category}";
 
-            Console.WriteLine("loading...");
+            Console.WriteLine("> loading...");
 
             try
             {
@@ -36,25 +38,50 @@ class Program
 
                 string responseBody = await response.Content.ReadAsStringAsync();
 
-                var data = JsonSerializer.Deserialize<ApiResponse>(responseBody);
-
-                if (data?.Results != null)
+                if (category == "people")
                 {
-                    List<string> items = new List<string>();
-                    foreach (var item in data.Results)
+                    var data = JsonSerializer.Deserialize<ApiResponse<Person>>(responseBody, new JsonSerializerOptions
+                    { PropertyNameCaseInsensitive = true });
+                    if (data?.Results != null)
                     {
-                        items.Add(item.Name);
+                        foreach (var item in data.Results)
+                        {
+                            Console.WriteLine($"> Person| name: {item.Name}, gender: {item.Gender}, birth year: {item.Birth_Year}");
+                        }
                     }
-                    Console.WriteLine(string.Join(", ", items));
+                }
+                else if (category == "planets")
+                {
+                    var data = JsonSerializer.Deserialize<ApiResponse<Planet>>(responseBody, new JsonSerializerOptions
+                    { PropertyNameCaseInsensitive = true });
+                    if (data?.Results != null)
+                    {
+                        foreach (var item in data.Results)
+                        {
+                            Console.WriteLine($"> Planet| name: {item.Name}, climate: {item.Climate}, terrain: {item.Terrain}");
+                        }
+                    }
+                }
+                else if (category == "starships")
+                {
+                    var data = JsonSerializer.Deserialize<ApiResponse<StarShip>>(responseBody, new JsonSerializerOptions
+                    { PropertyNameCaseInsensitive = true });
+                    if (data?.Results != null)
+                    {
+                        foreach (var item in data.Results)
+                        {
+                            Console.WriteLine($"> Starships| name: {item.Name}, model: {item.Model}, manufacturer: {item.Manufacturer}");
+                        }
+                    }
                 }
                 else
                 {
-                    Console.WriteLine("Something wrong with getting data.");
+                    Console.WriteLine("> Something wrong with getting data.");
                 }
             }
             catch (Exception exception)
             {
-                Console.WriteLine($"Exception: {exception.Message}");
+                Console.WriteLine($"> Exception: {exception.Message}");
             }
 
             Console.WriteLine();

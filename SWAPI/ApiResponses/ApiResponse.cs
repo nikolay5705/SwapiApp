@@ -1,7 +1,9 @@
+using SWAPI.SwapiModels;
+
 namespace SWAPI.ApiResponses
 {
-    public class ApiResponse
+    public class ApiResponse<T> 
     {
-        public List<SwapiItem> Results = new List<SwapiItem>();
+        public List<T> Results = new List<T>();
     }
 }
