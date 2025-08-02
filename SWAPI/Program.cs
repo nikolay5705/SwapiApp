@@ -2,7 +2,7 @@
 using SWAPI.ApiResponses;
 using SWAPI.ValidationData;
 using SWAPI.SwapiModels;
-
+using SWAPI.Services;
 
 class Program
 {
@@ -33,15 +33,12 @@ class Program
 
             try
             {
-                HttpResponseMessage response = await client.GetAsync(url);
-                response.EnsureSuccessStatusCode();
-
-                string responseBody = await response.Content.ReadAsStringAsync();
+                RequestService requestService = new RequestService();
 
                 if (category == "people")
                 {
-                    var data = JsonSerializer.Deserialize<ApiResponse<Person>>(responseBody, new JsonSerializerOptions
-                    { PropertyNameCaseInsensitive = true });
+                    var data = await requestService.GetAsync<Person>(url);
+
                     if (data?.Results != null)
                     {
                         foreach (var item in data.Results)
@@ -52,8 +49,8 @@ class Program
                 }
                 else if (category == "planets")
                 {
-                    var data = JsonSerializer.Deserialize<ApiResponse<Planet>>(responseBody, new JsonSerializerOptions
-                    { PropertyNameCaseInsensitive = true });
+                    var data = await requestService.GetAsync<Planet>(url);
+
                     if (data?.Results != null)
                     {
                         foreach (var item in data.Results)
@@ -64,8 +61,8 @@ class Program
                 }
                 else if (category == "starships")
                 {
-                    var data = JsonSerializer.Deserialize<ApiResponse<StarShip>>(responseBody, new JsonSerializerOptions
-                    { PropertyNameCaseInsensitive = true });
+                    var data = await requestService.GetAsync<StarShip>(url);
+
                     if (data?.Results != null)
                     {
                         foreach (var item in data.Results)
