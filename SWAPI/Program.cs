@@ -6,8 +6,7 @@ using SWAPI.Services;
 
 class Program
 {
-    private static readonly IRequestService _requestService = new RequestService();
-    static async Task Main()
+    static void Main()
     {
         while (true)
         {
@@ -34,39 +33,18 @@ class Program
             {
                 if (category == "people")
                 {
-                    var data = await _requestService.GetAsync<CollectionResponse<Person>>(url);
-
-                    if (data?.Results != null)
-                    {
-                        foreach (var item in data.Results)
-                        {
-                            Console.WriteLine($"> Person| name: {item.Name}, gender: {item.Gender}, birth year: {item.Birth_Year}");
-                        }
-                    }
+                    PeopleService peopleService = new PeopleService();
+                    peopleService.GetInformationAboutPeople(url);
                 }
                 else if (category == "planets")
                 {
-                    var data = await _requestService.GetAsync<CollectionResponse<Planet>>(url);
-
-                    if (data?.Results != null)
-                    {
-                        foreach (var item in data.Results)
-                        {
-                            Console.WriteLine($"> Planet| name: {item.Name}, climate: {item.Climate}, terrain: {item.Terrain}");
-                        }
-                    }
+                    PlanetService planetService = new PlanetService();
+                    planetService.GetInformationAboutPlanet(url);
                 }
                 else if (category == "starships")
                 {
-                    var data = await _requestService.GetAsync<CollectionResponse<StarShip>>(url);
-
-                    if (data?.Results != null)
-                    {
-                        foreach (var item in data.Results)
-                        {
-                            Console.WriteLine($"> Starships| name: {item.Name}, model: {item.Model}, manufacturer: {item.Manufacturer}");
-                        }
-                    }
+                    StarshipsService starshipsService = new StarshipsService();
+                    starshipsService.GetInformationAboutStarships(url);
                 }
                 else
                 {

@@ -1,5 +1,3 @@
-using SWAPI.SwapiModels;
-
 namespace SWAPI.Interfaces
 {
     public interface IRequestService

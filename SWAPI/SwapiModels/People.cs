@@ -1,6 +1,6 @@
 namespace SWAPI.SwapiModels
 {
-    public class Person
+    public class People
     {
         public string Name { get; set; } = "";
         public string Gender { get; set; } = "";
