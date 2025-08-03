@@ -1,0 +1,9 @@
+<Project>
+
+	<PropertyGroup>
+		<LangVersion>14.0</LangVersion>
+	</PropertyGroup>
+
+	<Import Project="$(MSBuildThisFileDirectory)\CodeStyles.targets" />
+
+</Project>

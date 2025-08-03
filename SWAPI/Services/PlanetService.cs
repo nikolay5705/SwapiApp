@@ -6,23 +6,18 @@ namespace SWAPI.SwapiModels
     public class PlanetService : IPlanetsService
     {
         private readonly IRequestService _requestService;
+
         public PlanetService(IRequestService requestService)
         {
             _requestService = requestService;
         }
 
-        public async Task GetInformationAboutPlanet()
+        public async Task<List<Planet>> GetPlanetsAsync()
         {
             string url = $"https://swapi.info/api/planets";
             var data = await _requestService.GetAsync<CollectionResponse<Planet>>(url);
 
-            if (data?.Results != null)
-            {
-                foreach (var item in data.Results)
-                {
-                    Console.WriteLine($"> Planet| name: {item.Name}, climate: {item.Climate}, terrain: {item.Terrain}");
-                }
-            }
+            return data.Results;
         }
     }
 }

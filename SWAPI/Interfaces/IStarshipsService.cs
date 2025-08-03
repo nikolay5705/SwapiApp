@@ -1,11 +1,10 @@
 using SWAPI.Services;
+using SWAPI.SwapiModels;
 
 namespace SWAPI.Interfaces
 {
     public interface IStarshipsService
     {
-        public Task GetInformationAboutStarships();
-
+        public Task<List<Starship>> GetStarshipsAsync();
     }
-
 }

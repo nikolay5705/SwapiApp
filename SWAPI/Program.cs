@@ -1,21 +1,32 @@
 ﻿using System.Text.Json;
-using SWAPI.ValidationData;
-using SWAPI.SwapiModels;
 using SWAPI.Interfaces;
 using SWAPI.Services;
+using SWAPI.SwapiModels;
+using SWAPI.ValidationData;
 
-class Program
+// GetPeopleAsync/GetPlanetsAsync/GetStarshipsAsync
+public class Program
 {
-    private static IRequestService requestService = new RequestService();
-    private static IPeopleService peopleService = new PeopleService(requestService);
-    private static IPlanetsService planetsService = new PlanetService(requestService);
-    private static IStarshipsService starshipsService = new StarshipsService(requestService);
+    private static IRequestService _requestService = new RequestService();
+    private static IPeopleService? _peopleService;
+    private static IPlanetsService? _planetsService;
+    private static IStarshipsService? _starshipsService;
 
-    static async void Main()
+    private static void InitializeDependencies()
     {
+        _requestService = new RequestService();
+        _peopleService = new PeopleService(_requestService);
+        _planetsService = new PlanetService(_requestService);
+        _starshipsService = new StarshipsService(_requestService);
+    }
+
+    public static async void Main()
+    {
+        InitializeDependencies();
+
         while (true)
         {
-            //Get category (people, planets, starships) or 'exit' to finish the program
+            // Get category (people, planets, starships) or 'exit' to finish the program
             Console.Write("> ");
             string? category = Console.ReadLine()?.Trim().ToLower();
 
@@ -37,15 +48,15 @@ class Program
             {
                 if (category == "people")
                 {
-                    await peopleService.GetInformationAboutPeople();
+                    await _peopleService.GetPeopleAsync();
                 }
                 else if (category == "planets")
                 {
-                    await planetsService.GetInformationAboutPlanet();
+                    await _planetsService.GetPlanetsAsync();
                 }
                 else if (category == "starships")
                 {
-                    await starshipsService.GetInformationAboutStarships();
+                    await _starshipsService.GetStarshipsAsync();
                 }
                 else
                 {
@@ -60,5 +71,4 @@ class Program
             Console.WriteLine();
         }
     }
-
 }
