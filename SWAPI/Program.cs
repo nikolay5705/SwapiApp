@@ -6,7 +6,12 @@ using SWAPI.Services;
 
 class Program
 {
-    static void Main()
+    private static IRequestService requestService = new RequestService();
+    private static IPeopleService peopleService = new PeopleService(requestService);
+    private static IPlanetsService planetsService = new PlanetService(requestService);
+    private static IStarshipsService starshipsService = new StarshipsService(requestService);
+
+    static async void Main()
     {
         while (true)
         {
@@ -25,7 +30,6 @@ class Program
                 Console.WriteLine("> Incorrect category");
                 continue;
             }
-            string url = $"https://swapi.info/api/{category}";
 
             Console.WriteLine("> loading...");
 
@@ -33,18 +37,15 @@ class Program
             {
                 if (category == "people")
                 {
-                    PeopleService peopleService = new PeopleService();
-                    peopleService.GetInformationAboutPeople(url);
+                    await peopleService.GetInformationAboutPeople();
                 }
                 else if (category == "planets")
                 {
-                    PlanetService planetService = new PlanetService();
-                    planetService.GetInformationAboutPlanet(url);
+                    await planetsService.GetInformationAboutPlanet();
                 }
                 else if (category == "starships")
                 {
-                    StarshipsService starshipsService = new StarshipsService();
-                    starshipsService.GetInformationAboutStarships(url);
+                    await starshipsService.GetInformationAboutStarships();
                 }
                 else
                 {

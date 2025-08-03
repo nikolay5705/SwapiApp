@@ -6,9 +6,14 @@ namespace SWAPI.SwapiModels
 {
     public class StarshipsService : IStarshipsService
     {
-        private static readonly IRequestService _requestService = new RequestService();
-        public async void GetInformationAboutStarships(string url)
+        private readonly IRequestService _requestService;
+        public StarshipsService(IRequestService requestService)
         {
+            _requestService = requestService;
+        }
+        public async Task GetInformationAboutStarships()
+        {
+            string url = $"https://swapi.info/api/starships";
             var data = await _requestService.GetAsync<CollectionResponse<Starship>>(url);
 
             if (data?.Results != null)

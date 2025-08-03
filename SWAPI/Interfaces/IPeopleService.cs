@@ -4,7 +4,7 @@ namespace SWAPI.Interfaces
 {
     public interface IPeopleService
     {
-        public void GetInformationAboutPeople(string url);
+        public Task GetInformationAboutPeople();
 
     }
 

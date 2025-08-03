@@ -5,9 +5,15 @@ namespace SWAPI.SwapiModels
 {
     public class PlanetService : IPlanetsService
     {
-        private static readonly IRequestService _requestService = new RequestService();
-        public async void GetInformationAboutPlanet(string url)
+        private readonly IRequestService _requestService;
+        public PlanetService(IRequestService requestService)
         {
+            _requestService = requestService;
+        }
+
+        public async Task GetInformationAboutPlanet()
+        {
+            string url = $"https://swapi.info/api/planets";
             var data = await _requestService.GetAsync<CollectionResponse<Planet>>(url);
 
             if (data?.Results != null)

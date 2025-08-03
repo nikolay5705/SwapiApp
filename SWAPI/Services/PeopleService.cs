@@ -5,9 +5,15 @@ namespace SWAPI.SwapiModels
 {
     public class PeopleService : IPeopleService
     {
-        private static readonly IRequestService _requestService = new RequestService();
-        public async void GetInformationAboutPeople(string url)
+        private readonly IRequestService _requestService;
+        public PeopleService(IRequestService requestService)
         {
+            _requestService = requestService;
+        }
+
+        public async Task GetInformationAboutPeople()
+        {
+            string url = $"https://swapi.info/api/people";
             var data = await _requestService.GetAsync<CollectionResponse<People>>(url);
 
             if (data?.Results != null)
