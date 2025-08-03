@@ -1,11 +1,7 @@
-using SWAPI.SwapiModels;
-
-namespace SWAPI.Interfaces
+namespace SWAPI.Services.Requests
 {
     public interface IRequestService
     {
-        
         public Task<T> GetAsync<T>(string url);
     }
-
 }
