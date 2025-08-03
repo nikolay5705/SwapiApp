@@ -1,8 +1,6 @@
 using System.Text.Json;
-using SWAPI.Interfaces;
-using SWAPI.SwapiModels;
 
-namespace SWAPI.Services
+namespace SWAPI.Services.Requests
 {
     public class RequestService : IRequestService
     {

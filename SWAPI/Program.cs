@@ -1,24 +1,15 @@
-﻿using System.Text.Json;
-using SWAPI.Interfaces;
-using SWAPI.Services;
-using SWAPI.SwapiModels;
-using SWAPI.ValidationData;
+﻿using SWAPI.Services.Peoples;
+using SWAPI.Services.Planets;
+using SWAPI.Services.Requests;
+using SWAPI.Services.Starships;
+using SWAPI.Validation;
 
-// GetPeopleAsync/GetPlanetsAsync/GetStarshipsAsync
 public class Program
 {
-    private static IRequestService _requestService = new RequestService();
+    private static IRequestService? _requestService;
     private static IPeopleService? _peopleService;
     private static IPlanetsService? _planetsService;
     private static IStarshipsService? _starshipsService;
-
-    private static void InitializeDependencies()
-    {
-        _requestService = new RequestService();
-        _peopleService = new PeopleService(_requestService);
-        _planetsService = new PlanetService(_requestService);
-        _starshipsService = new StarshipsService(_requestService);
-    }
 
     public static async void Main()
     {
@@ -48,15 +39,48 @@ public class Program
             {
                 if (category == "people")
                 {
-                    await _peopleService.GetPeopleAsync();
+                    var listOfPeople = await _peopleService.GetPeopleAsync();
+                    if (listOfPeople?.Any() == true)
+                    {
+                        foreach (var person in listOfPeople)
+                        {
+                            Console.WriteLine($"> Person| name: {person.Name}, gender: {person.Gender}, birth year: {person.Birth_Year}");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("> No people found.");
+                    }
                 }
                 else if (category == "planets")
                 {
-                    await _planetsService.GetPlanetsAsync();
+                    var listOfPlanets = await _planetsService.GetPlanetsAsync();
+                    if (listOfPlanets?.Any() == true)
+                    {
+                        foreach (var planet in listOfPlanets)
+                        {
+                            Console.WriteLine($"> Planet| name: {planet.Name}, climate: {planet.Climate}, terrain: {planet.Terrain}");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("> No planets found.");
+                    }
                 }
                 else if (category == "starships")
                 {
-                    await _starshipsService.GetStarshipsAsync();
+                    var listOfStarships = await _starshipsService.GetStarshipsAsync();
+                    if (listOfStarships?.Any() == true)
+                    {
+                        foreach (var starship in listOfStarships)
+                        {
+                            Console.WriteLine($"> Starships| name: {starship.Name}, model: {starship.Model}, manufacturer: {starship.Manufacturer}");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("> No starships found.");
+                    }
                 }
                 else
                 {
@@ -70,5 +94,13 @@ public class Program
 
             Console.WriteLine();
         }
+    }
+
+    private static void InitializeDependencies()
+    {
+        _requestService = new RequestService();
+        _peopleService = new PeopleService(_requestService);
+        _planetsService = new PlanetService(_requestService);
+        _starshipsService = new StarshipsService(_requestService);
     }
 }

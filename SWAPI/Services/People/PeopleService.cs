@@ -1,7 +1,7 @@
-using SWAPI.Interfaces;
-using SWAPI.Services;
+using SWAPI.Models;
+using SWAPI.Services.Requests;
 
-namespace SWAPI.SwapiModels
+namespace SWAPI.Services.Peoples
 {
     public class PeopleService : IPeopleService
     {
@@ -12,10 +12,10 @@ namespace SWAPI.SwapiModels
             _requestService = requestService;
         }
 
-        public async Task<List<People>> GetPeopleAsync()
+        public async Task<List<Person>> GetPeopleAsync()
         {
             string url = $"https://swapi.info/api/people";
-            var data = await _requestService.GetAsync<CollectionResponse<People>>(url);
+            var data = await _requestService.GetAsync<CollectionResponse<Person>>(url);
 
             return data.Results;
         }

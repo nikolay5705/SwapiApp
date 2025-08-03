@@ -1,6 +1,4 @@
-using SWAPI.SwapiModels;
-
-namespace SWAPI.SwapiModels
+namespace SWAPI.Models
 {
     public class CollectionResponse<T>
     {

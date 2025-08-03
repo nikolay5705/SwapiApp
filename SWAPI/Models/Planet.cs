@@ -1,4 +1,4 @@
-namespace SWAPI.SwapiModels
+namespace SWAPI.Models
 {
     public class Planet
     {

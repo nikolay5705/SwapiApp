@@ -1,7 +1,6 @@
-using SWAPI.Services;
-using SWAPI.SwapiModels;
+using SWAPI.Models;
 
-namespace SWAPI.Interfaces
+namespace SWAPI.Services.Starships
 {
     public interface IStarshipsService
     {

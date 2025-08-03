@@ -1,6 +1,6 @@
-namespace SWAPI.SwapiModels
+namespace SWAPI.Models
 {
-    public class People
+    public class Person
     {
         public string Name { get; set; } = string.Empty;
 

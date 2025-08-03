@@ -1,4 +1,4 @@
-namespace SWAPI.Interfaces
+namespace SWAPI.Services.Requests
 {
     public interface IRequestService
     {
