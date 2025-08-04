@@ -1,4 +1,7 @@
-﻿using SWAPI.Services.Peoples;
+﻿using SWAPI.Caching;
+using SWAPI.DataManager;
+using SWAPI.Models;
+using SWAPI.Services.Peoples;
 using SWAPI.Services.Planets;
 using SWAPI.Services.Requests;
 using SWAPI.Services.Starships;
@@ -6,18 +9,25 @@ using SWAPI.Validation;
 
 public class Program
 {
+    private static IPeopleManager? _peopleManager;
+    private static IPlanetsManager? _planetsManager;
+    private static IStarshipsManager? _starshipsManager;
     private static IRequestService? _requestService;
-    private static IPeopleService? _peopleService;
-    private static IPlanetsService? _planetsService;
-    private static IStarshipsService? _starshipsService;
 
-    public static async void Main()
+    private static IPeopleService? _peopleService;
+    private static IPlanetsService? _planetService;
+    private static IStarshipsService? _starshipService;
+
+    private static IRepository<Person>? _peopleCache;
+    private static IRepository<Planet>? _planetCache;
+    private static IRepository<Starship>? _starshipCache;
+
+    public static async Task Main()
     {
         InitializeDependencies();
 
         while (true)
         {
-            // Get category (people, planets, starships) or 'exit' to finish the program
             Console.Write("> ");
             string? category = Console.ReadLine()?.Trim().ToLower();
 
@@ -39,8 +49,8 @@ public class Program
             {
                 if (category == "people")
                 {
-                    var listOfPeople = await _peopleService.GetPeopleAsync();
-                    if (listOfPeople?.Any() == true)
+                    var listOfPeople = await _peopleManager.GetPeopleAsync();
+                    if (listOfPeople.Any())
                     {
                         foreach (var person in listOfPeople)
                         {
@@ -54,8 +64,8 @@ public class Program
                 }
                 else if (category == "planets")
                 {
-                    var listOfPlanets = await _planetsService.GetPlanetsAsync();
-                    if (listOfPlanets?.Any() == true)
+                    var listOfPlanets = await _planetsManager.GetPlanetAsync();
+                    if (listOfPlanets.Any())
                     {
                         foreach (var planet in listOfPlanets)
                         {
@@ -69,8 +79,8 @@ public class Program
                 }
                 else if (category == "starships")
                 {
-                    var listOfStarships = await _starshipsService.GetStarshipsAsync();
-                    if (listOfStarships?.Any() == true)
+                    var listOfStarships = await _starshipsManager.GetStarshipsAsync();
+                    if (listOfStarships.Any())
                     {
                         foreach (var starship in listOfStarships)
                         {
@@ -99,8 +109,16 @@ public class Program
     private static void InitializeDependencies()
     {
         _requestService = new RequestService();
+
         _peopleService = new PeopleService(_requestService);
-        _planetsService = new PlanetService(_requestService);
-        _starshipsService = new StarshipsService(_requestService);
+        _planetService = new PlanetService(_requestService);
+        _starshipService = new StarshipsService(_requestService);
+
+        _peopleCache = new MemoryRepository<Person>();
+        _planetCache = new MemoryRepository<Planet>();
+        _starshipCache = new MemoryRepository<Starship>();
+        _peopleManager = new PeopleManager(_peopleCache, _peopleService);
+        _planetsManager = new PlanetsManager(_planetCache, _planetService);
+        _starshipsManager = new StarshipsManager(_starshipCache, _starshipService);
     }
 }
