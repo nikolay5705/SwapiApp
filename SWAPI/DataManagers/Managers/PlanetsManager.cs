@@ -1,0 +1,42 @@
+using SWAPI.Caching;
+using SWAPI.DataManager.Interfaces;
+using SWAPI.Mappers;
+using SWAPI.Models;
+using SWAPI.Models.Entities;
+using SWAPI.Services.Planets;
+
+namespace SWAPI.DataManager.Manager
+{
+     public class PlanetsManager : IPlanetsManager
+    {
+        private readonly IRepository<PlanetEntity> _cache;
+        private readonly IPlanetsService _peopleService;
+
+        public PlanetsManager(IRepository<PlanetEntity> cache, IPlanetsService peopleService)
+        {
+            _cache = cache;
+            _peopleService = peopleService;
+        }
+
+        public async Task<List<Planet>> GetPlanetAsync()
+        {
+            var cached = _cache.GetAll();
+            if (cached.Any())
+            {
+                var data = cached.ConvertAll(item => item.ToModel());
+                return data;
+            }
+
+            var dataFromApi = await _peopleService.GetPlanetsAsync();
+
+            if (dataFromApi != null && dataFromApi.Any())
+            {
+                var cache = dataFromApi.ConvertAll(item => item.ToEntity());
+                _cache.AddRange(cache);
+            }
+
+            var result = dataFromApi.Select(item => item.ToModel()).ToList();
+            return result;
+        }
+    }
+}

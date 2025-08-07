@@ -1,5 +1,7 @@
 using SWAPI.Caching;
 using SWAPI.Models;
+using SWAPI.Models.Dtos;
+using SWAPI.Models.Entities;
 using SWAPI.Services.Requests;
 
 namespace SWAPI.Services.Planets
@@ -13,10 +15,10 @@ namespace SWAPI.Services.Planets
             _requestService = requestService;
         }
 
-        public async Task<List<Planet>> GetPlanetsAsync()
+        public async Task<List<PlanetDto>> GetPlanetsAsync()
         {
             string url = $"https://swapi.info/api/planets";
-            var data = await _requestService.GetAsync<CollectionResponse<Planet>>(url);
+            var data = await _requestService.GetAsync<CollectionResponse<PlanetDto>>(url);
 
             return data.Results;
         }

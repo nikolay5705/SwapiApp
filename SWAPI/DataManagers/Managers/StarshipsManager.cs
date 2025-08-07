@@ -1,15 +1,19 @@
 using SWAPI.Caching;
+using SWAPI.DataManager.Interfaces;
+using SWAPI.Mappers;
 using SWAPI.Models;
+using SWAPI.Models.Dtos;
+using SWAPI.Models.Entities;
 using SWAPI.Services.Starships;
 
-namespace SWAPI.DataManager
+namespace SWAPI.DataManager.Manager
 {
     public class StarshipsManager : IStarshipsManager
     {
-        private readonly IRepository<Starship> _cache;
+        private readonly IRepository<StarshipEntity> _cache;
         private readonly IStarshipsService _starshipService;
 
-        public StarshipsManager(IRepository<Starship> cache, IStarshipsService starshipService)
+        public StarshipsManager(IRepository<StarshipEntity> cache, IStarshipsService starshipService)
         {
             _cache = cache;
             _starshipService = starshipService;
@@ -20,17 +24,20 @@ namespace SWAPI.DataManager
             var cached = _cache.GetAll();
             if (cached.Any())
             {
-                return cached;
+                var data = cached.ConvertAll(item => item.ToModel());
+                return data;
             }
 
             var dataFromApi = await _starshipService.GetStarshipsAsync();
 
             if (dataFromApi != null && dataFromApi.Any())
             {
-                _cache.Add(dataFromApi);
+                var cache = dataFromApi.ConvertAll(item => item.ToEntity());
+                _cache.AddRange(cache);
             }
 
-            return dataFromApi;
+            var result = dataFromApi.Select(item => item.ToModel()).ToList();
+            return result;
         }
     }
 }

@@ -1,6 +1,6 @@
 using SWAPI.Models;
 
-namespace SWAPI.DataManager
+namespace SWAPI.DataManager.Interfaces
 {
     public interface IStarshipsManager
     {

@@ -9,7 +9,7 @@ namespace SWAPI.Caching
             _cacheStorage.Add(item);
         }
 
-        public void Add(IEnumerable<T> items)
+        public void AddRange(IEnumerable<T> items)
         {
             _cacheStorage.AddRange(items);
         }

@@ -1,6 +1,10 @@
 ﻿using SWAPI.Caching;
-using SWAPI.DataManager;
+using SWAPI.DataManager.Interfaces;
+using SWAPI.DataManager.Manager;
+using SWAPI.Mappers;
 using SWAPI.Models;
+using SWAPI.Models.Dtos;
+using SWAPI.Models.Entities;
 using SWAPI.Services.Peoples;
 using SWAPI.Services.Planets;
 using SWAPI.Services.Requests;
@@ -18,9 +22,9 @@ public class Program
     private static IPlanetsService? _planetService;
     private static IStarshipsService? _starshipService;
 
-    private static IRepository<Person>? _peopleCache;
-    private static IRepository<Planet>? _planetCache;
-    private static IRepository<Starship>? _starshipCache;
+    private static IRepository<PersonEntity>? _peopleCache;
+    private static IRepository<PlanetEntity>? _planetCache;
+    private static IRepository<StarshipEntity>? _starshipCache;
 
     public static async Task Main()
     {
@@ -114,9 +118,9 @@ public class Program
         _planetService = new PlanetService(_requestService);
         _starshipService = new StarshipsService(_requestService);
 
-        _peopleCache = new MemoryRepository<Person>();
-        _planetCache = new MemoryRepository<Planet>();
-        _starshipCache = new MemoryRepository<Starship>();
+        _peopleCache = new MemoryRepository<PersonEntity>();
+        _planetCache = new MemoryRepository<PlanetEntity>();
+        _starshipCache = new MemoryRepository<StarshipEntity>();
         _peopleManager = new PeopleManager(_peopleCache, _peopleService);
         _planetsManager = new PlanetsManager(_planetCache, _planetService);
         _starshipsManager = new StarshipsManager(_starshipCache, _starshipService);

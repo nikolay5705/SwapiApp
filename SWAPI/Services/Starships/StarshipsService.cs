@@ -1,5 +1,7 @@
 using SWAPI.Caching;
 using SWAPI.Models;
+using SWAPI.Models.Dtos;
+using SWAPI.Models.Entities;
 using SWAPI.Services.Requests;
 
 namespace SWAPI.Services.Starships
@@ -13,10 +15,10 @@ namespace SWAPI.Services.Starships
             _requestService = requestService;
         }
 
-        public async Task<List<Starship>> GetStarshipsAsync()
+        public async Task<List<StarshipDto>> GetStarshipsAsync()
         {
             string url = $"https://swapi.info/api/starships";
-            var data = await _requestService.GetAsync<CollectionResponse<Starship>>(url);
+            var data = await _requestService.GetAsync<CollectionResponse<StarshipDto>>(url);
 
             return data.Results;
         }
