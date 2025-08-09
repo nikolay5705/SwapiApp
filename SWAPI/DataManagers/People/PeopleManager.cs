@@ -1,25 +1,24 @@
 using SWAPI.Caching;
-using SWAPI.DataManager.Interfaces;
 using SWAPI.Mappers;
 using SWAPI.Models;
 using SWAPI.Models.Dtos;
 using SWAPI.Models.Entities;
-using SWAPI.Services.Starships;
+using SWAPI.Services.People;
 
-namespace SWAPI.DataManager.Manager
+namespace SWAPI.DataManager.People
 {
-    public class StarshipsManager : IStarshipsManager
+    public class PeopleManager : IPeopleManager
     {
-        private readonly IRepository<StarshipEntity> _cache;
-        private readonly IStarshipsService _starshipService;
+        private readonly IRepository<PersonEntity> _cache;
+        private readonly IPeopleService _peopleService;
 
-        public StarshipsManager(IRepository<StarshipEntity> cache, IStarshipsService starshipService)
+        public PeopleManager(IRepository<PersonEntity> cache, IPeopleService peopleService)
         {
             _cache = cache;
-            _starshipService = starshipService;
+            _peopleService = peopleService;
         }
 
-        public async Task<List<Starship>> GetStarshipsAsync()
+        public async Task<List<Person>> GetPeopleAsync()
         {
             var cached = _cache.GetAll();
             if (cached.Any())
@@ -28,7 +27,7 @@ namespace SWAPI.DataManager.Manager
                 return data;
             }
 
-            var dataFromApi = await _starshipService.GetStarshipsAsync();
+            var dataFromApi = await _peopleService.GetPeopleAsync();
 
             if (dataFromApi != null && dataFromApi.Any())
             {
@@ -38,6 +37,12 @@ namespace SWAPI.DataManager.Manager
 
             var result = dataFromApi.Select(item => item.ToModel()).ToList();
             return result;
+        }
+
+        public async Task<PersonDetails> GetPeopleDetailsAsync(string id)
+        {
+            var dto = await _peopleService.GetPersonDetailsAsync(id);
+            return dto.ToDetailsModel();
         }
     }
 }

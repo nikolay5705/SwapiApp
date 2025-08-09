@@ -7,5 +7,7 @@ namespace SWAPI.Services.Planets
     public interface IPlanetsService
     {
         public Task<List<PlanetDto>> GetPlanetsAsync();
+
+        Task<PlanetDetailsDto> GetPlanetDetailsAsync(string id);
     }
 }

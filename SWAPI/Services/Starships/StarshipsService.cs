@@ -22,5 +22,11 @@ namespace SWAPI.Services.Starships
 
             return data.Results;
         }
+
+        public async Task<StarshipDetailsDto> GetStarshipDetailsAsync(string id)
+        {
+            string url = $"https://swapi.info/api/starships/{id}";
+            return await _requestService.GetAsync<StarshipDetailsDto>(url);
+        }
     }
 }

@@ -1,14 +1,16 @@
 ﻿using SWAPI.Caching;
-using SWAPI.DataManager.Interfaces;
-using SWAPI.DataManager.Manager;
+using SWAPI.DataManager.People;
+using SWAPI.DataManager.Planets;
+using SWAPI.DataManager.Starships;
 using SWAPI.Mappers;
 using SWAPI.Models;
 using SWAPI.Models.Dtos;
 using SWAPI.Models.Entities;
-using SWAPI.Services.Peoples;
+using SWAPI.Services.People;
 using SWAPI.Services.Planets;
 using SWAPI.Services.Requests;
 using SWAPI.Services.Starships;
+using SWAPI.Utils;
 using SWAPI.Validation;
 
 public class Program
@@ -33,67 +35,88 @@ public class Program
         while (true)
         {
             Console.Write("> ");
-            string? category = Console.ReadLine()?.Trim().ToLower();
+            string? input = Console.ReadLine()?.Trim().ToLower();
 
-            if (ValidationData.IsExit(category))
+            if (input == null)
+                continue;
+
+            if (ValidationData.IsExit(input))
             {
                 Console.WriteLine("> Program has finished working");
                 break;
             }
 
-            if (ValidationData.IsUnknownCategory(category))
+            if (ValidationData.IsUnknownCategory(input))
             {
                 Console.WriteLine("> Incorrect category");
                 continue;
             }
 
-            Console.WriteLine("> loading...");
+            Console.WriteLine("> ...");
 
             try
             {
-                if (category == "people")
+                if (input == "people")
                 {
                     var listOfPeople = await _peopleManager.GetPeopleAsync();
-                    if (listOfPeople.Any())
+
+                    Console.Write("> ");
+                    string? personName = Console.ReadLine()?.Trim().ToLower();
+
+                    if (!string.IsNullOrEmpty(personName))
                     {
-                        foreach (var person in listOfPeople)
+                        var person = listOfPeople.FirstOrDefault(p => p.Name.ToLower() == personName);
+                        if (person != null)
                         {
-                            Console.WriteLine($"> Person| name: {person.Name}, gender: {person.Gender}, birth year: {person.Birth_Year}");
+                            var details = await _peopleManager.GetPeopleDetailsAsync(person.Id);
+                            DetailsDescription.PrintPersonDetails(details);
+                        }
+                        else
+                        {
+                            Console.WriteLine("> Person not found.");
                         }
                     }
-                    else
-                    {
-                        Console.WriteLine("> No people found.");
-                    }
                 }
-                else if (category == "planets")
+                else if (input == "planets")
                 {
                     var listOfPlanets = await _planetsManager.GetPlanetAsync();
-                    if (listOfPlanets.Any())
+
+                    Console.Write("> ");
+                    string? planetName = Console.ReadLine()?.Trim().ToLower();
+
+                    if (!string.IsNullOrEmpty(planetName))
                     {
-                        foreach (var planet in listOfPlanets)
+                        var planet = listOfPlanets.FirstOrDefault(p => p.Name.ToLower() == planetName);
+                        if (planet != null)
                         {
-                            Console.WriteLine($"> Planet| name: {planet.Name}, climate: {planet.Climate}, terrain: {planet.Terrain}");
+                            var details = await _planetsManager.GetPlanetDetailsAsync(planet.Id);
+                            DetailsDescription.PrintPlanetDetails(details);
                         }
-                    }
-                    else
-                    {
-                        Console.WriteLine("> No planets found.");
+                        else
+                        {
+                            Console.WriteLine("> Planet not found.");
+                        }
                     }
                 }
-                else if (category == "starships")
+                else if (input == "starships")
                 {
                     var listOfStarships = await _starshipsManager.GetStarshipsAsync();
-                    if (listOfStarships.Any())
+
+                    Console.Write("> ");
+                    string? starshipName = Console.ReadLine()?.Trim().ToLower();
+
+                    if (!string.IsNullOrEmpty(starshipName))
                     {
-                        foreach (var starship in listOfStarships)
+                        var starship = listOfStarships.FirstOrDefault(s => s.Name.ToLower() == starshipName);
+                        if (starship != null)
                         {
-                            Console.WriteLine($"> Starships| name: {starship.Name}, model: {starship.Model}, manufacturer: {starship.Manufacturer}");
+                            var details = await _starshipsManager.GetStarshipDetailsAsync(starship.Id);
+                            DetailsDescription.PrintStarshipDetails(details);
                         }
-                    }
-                    else
-                    {
-                        Console.WriteLine("> No starships found.");
+                        else
+                        {
+                            Console.WriteLine("> Starship not found.");
+                        }
                     }
                 }
                 else
@@ -101,9 +124,9 @@ public class Program
                     Console.WriteLine("> Something wrong with getting data.");
                 }
             }
-            catch (Exception exception)
+            catch (Exception ex)
             {
-                Console.WriteLine($"> Exception: {exception.Message}");
+                Console.WriteLine($"> Exception: {ex.Message}");
             }
 
             Console.WriteLine();

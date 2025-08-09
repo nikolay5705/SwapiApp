@@ -7,5 +7,7 @@ namespace SWAPI.Services.Starships
     public interface IStarshipsService
     {
         public Task<List<StarshipDto>> GetStarshipsAsync();
+
+        Task<StarshipDetailsDto> GetStarshipDetailsAsync(string id);
     }
 }

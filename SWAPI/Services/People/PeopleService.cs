@@ -4,7 +4,7 @@ using SWAPI.Models.Dtos;
 using SWAPI.Models.Entities;
 using SWAPI.Services.Requests;
 
-namespace SWAPI.Services.Peoples
+namespace SWAPI.Services.People
 {
     public class PeopleService : IPeopleService
     {
@@ -21,6 +21,12 @@ namespace SWAPI.Services.Peoples
             var data = await _requestService.GetAsync<CollectionResponse<PersonDto>>(url);
 
             return data.Results;
+        }
+
+        public async Task<PersonDetailsDto> GetPersonDetailsAsync(string id)
+        {
+            string url = $"https://swapi.info/api/people/{id}";
+            return await _requestService.GetAsync<PersonDetailsDto>(url);
         }
     }
 }

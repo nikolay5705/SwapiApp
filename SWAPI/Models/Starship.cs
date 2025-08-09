@@ -7,5 +7,7 @@ namespace SWAPI.Models
         public string Model { get; set; } = string.Empty;
 
         public string Manufacturer { get; set; } = string.Empty;
+
+        public string Id { get; set; } = string.Empty;
     }
 }

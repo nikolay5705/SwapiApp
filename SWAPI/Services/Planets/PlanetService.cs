@@ -22,5 +22,11 @@ namespace SWAPI.Services.Planets
 
             return data.Results;
         }
+
+        public async Task<PlanetDetailsDto> GetPlanetDetailsAsync(string id)
+        {
+            string url = $"https://swapi.info/api/planets/{id}";
+            return await _requestService.GetAsync<PlanetDetailsDto>(url);
+        }
     }
 }

@@ -1,21 +1,20 @@
 using SWAPI.Caching;
-using SWAPI.DataManager.Interfaces;
 using SWAPI.Mappers;
 using SWAPI.Models;
 using SWAPI.Models.Entities;
 using SWAPI.Services.Planets;
 
-namespace SWAPI.DataManager.Manager
+namespace SWAPI.DataManager.Planets
 {
-     public class PlanetsManager : IPlanetsManager
+    public class PlanetsManager : IPlanetsManager
     {
         private readonly IRepository<PlanetEntity> _cache;
-        private readonly IPlanetsService _peopleService;
+        private readonly IPlanetsService _planetService;
 
         public PlanetsManager(IRepository<PlanetEntity> cache, IPlanetsService peopleService)
         {
             _cache = cache;
-            _peopleService = peopleService;
+            _planetService = peopleService;
         }
 
         public async Task<List<Planet>> GetPlanetAsync()
@@ -27,7 +26,7 @@ namespace SWAPI.DataManager.Manager
                 return data;
             }
 
-            var dataFromApi = await _peopleService.GetPlanetsAsync();
+            var dataFromApi = await _planetService.GetPlanetsAsync();
 
             if (dataFromApi != null && dataFromApi.Any())
             {
@@ -37,6 +36,12 @@ namespace SWAPI.DataManager.Manager
 
             var result = dataFromApi.Select(item => item.ToModel()).ToList();
             return result;
+        }
+
+        public async Task<PlanetDetails> GetPlanetDetailsAsync(string id)
+        {
+            var dto = await _planetService.GetPlanetDetailsAsync(id);
+            return dto.ToDetailsModel();
         }
     }
 }

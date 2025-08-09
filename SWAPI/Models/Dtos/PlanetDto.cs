@@ -7,5 +7,7 @@ namespace SWAPI.Models.Dtos
         public string Climate { get; set; } = string.Empty;
 
         public string Terrain { get; set; } = string.Empty;
+
+        public string Url { get; set; } = string.Empty;
     }
 }
