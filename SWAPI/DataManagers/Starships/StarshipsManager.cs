@@ -11,8 +11,6 @@ namespace SWAPI.DataManager.Starships
     {
         private readonly IRepository<StarshipEntity> _cache;
 
-        private readonly IRepository<StarshipDetailsEntity> _cacheDetails;
-
         private readonly IStarshipsService _starshipService;
 
         public StarshipsManager(IRepository<StarshipEntity> cache, IStarshipsService starshipService)
@@ -44,11 +42,11 @@ namespace SWAPI.DataManager.Starships
 
         public async Task<StarshipDetails> GetStarshipDetailsAsync(string id)
         {
-            var cachedStarship = _cacheDetails.GetAll().FirstOrDefault(s => s.Id == id);
+            var cached = _cache.GetAll().FirstOrDefault(s => s.Id == id);
 
-            if (cachedStarship != null)
+            if (cached != null)
             {
-                return cachedStarship.ToDetailsModel();
+                return cached.ToDetailsModel();
             }
 
             var dto = await _starshipService.GetStarshipDetailsAsync(id);
@@ -57,7 +55,7 @@ namespace SWAPI.DataManager.Starships
                 return null;
 
             var entity = dto.ToDetailsEntity();
-            _cacheDetails.Add(entity);
+            _cache.Add(entity);
 
             return dto.ToDetailsModel();
         }

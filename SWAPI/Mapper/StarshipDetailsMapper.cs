@@ -33,33 +33,23 @@ namespace SWAPI.Mappers
             };
         }
 
-        public static StarshipDetails ToDetailsModel(this StarshipDetailsEntity starshipDetailsEntity)
+        public static StarshipDetails ToDetailsModel(this StarshipEntity starshipEntity)
         {
             return new StarshipDetails
             {
-                Name = starshipDetailsEntity.Name,
-                Model = starshipDetailsEntity.Model,
-                Manufacturer = starshipDetailsEntity.Manufacturer,
-                CostInCredits = starshipDetailsEntity.CostInCredits,
-                Length = starshipDetailsEntity.Length,
-                Crew = starshipDetailsEntity.Crew,
-                Passengers = starshipDetailsEntity.Passengers,
-                CargoCapacity = starshipDetailsEntity.CargoCapacity
+                Name = starshipEntity.Name,
+                Model = starshipEntity.Model,
+                Manufacturer = starshipEntity.Manufacturer,
             };
         }
 
-        public static StarshipDetailsEntity ToDetailsEntity(this StarshipDetailsDto starshipDetailsDto)
+        public static StarshipEntity ToDetailsEntity(this StarshipDetailsDto starshipDetailsDto)
         {
-            return new StarshipDetailsEntity
+            return new StarshipEntity
             {
                 Name = starshipDetailsDto.Name,
                 Model = starshipDetailsDto.Model,
                 Manufacturer = starshipDetailsDto.Manufacturer,
-                CostInCredits = starshipDetailsDto.CostInCredits,
-                Length = starshipDetailsDto.Length,
-                Crew = starshipDetailsDto.Crew,
-                Passengers = starshipDetailsDto.Passengers,
-                CargoCapacity = starshipDetailsDto.CargoCapacity
             };
         }
     }

@@ -10,8 +10,6 @@ namespace SWAPI.DataManager.Planets
     {
         private readonly IRepository<PlanetEntity> _cache;
 
-        private readonly IRepository<PlanetDetailsEntity> _cacheDetails;
-
         private readonly IPlanetsService _planetService;
 
         public PlanetsManager(IRepository<PlanetEntity> cache, IPlanetsService peopleService)
@@ -43,11 +41,11 @@ namespace SWAPI.DataManager.Planets
 
         public async Task<PlanetDetails> GetPlanetDetailsAsync(string id)
         {
-            var cachedPlanet = _cacheDetails.GetAll().FirstOrDefault(p => p.Id == id);
+            var cached = _cache.GetAll().FirstOrDefault(p => p.Id == id);
 
-            if (cachedPlanet != null)
+            if (cached != null)
             {
-                return cachedPlanet.ToDetailsModel();
+                return cached.ToDetailsModel();
             }
 
             var dto = await _planetService.GetPlanetDetailsAsync(id);
@@ -56,7 +54,7 @@ namespace SWAPI.DataManager.Planets
                 return null;
 
             var entity = dto.ToDetailsEntity();
-            _cacheDetails.Add(entity);
+            _cache.Add(entity);
 
             return dto.ToDetailsModel();
         }

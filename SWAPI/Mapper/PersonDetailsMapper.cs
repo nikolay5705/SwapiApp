@@ -17,39 +17,30 @@ namespace SWAPI.Mappers
             };
         }
 
-        public static PersonDetails ToDetailsModel(this PersonDetailsDto personDetailsDto)
+        public static PersonDetails ToDetailsModel(this PersonEntity personEntity)
         {
             return new PersonDetails
+            {
+                Id = personEntity.Id,
+                Name = personEntity.Name,
+                Gender = personEntity.Gender,
+                Birth_Year = personEntity.Birth_Year,
+            };
+        }
+
+        public static PersonEntity ToDetailsEntity(this PersonDetailsDto personDetailsDto)
+        {
+            return new PersonEntity
             {
                 Name = personDetailsDto.Name,
                 Gender = personDetailsDto.Gender,
-                Birth_Year = personDetailsDto.Birth_Year,
-                Height = personDetailsDto.Height,
-                Mass = personDetailsDto.Mass,
-                HairColor = personDetailsDto.HairColor,
-                SkinColor = personDetailsDto.SkinColor,
-                EyeColor = personDetailsDto.EyeColor
+                Birth_Year = personDetailsDto.Birth_Year
             };
         }
 
-        public static PersonDetails ToDetailsModel(this PersonDetailsEntity personDetailsEntity)
+        public static PersonDetails ToDetailsModel(this PersonDetailsDto personDetailsDto)
         {
             return new PersonDetails
-            {
-                Name = personDetailsEntity.Name,
-                Gender = personDetailsEntity.Gender,
-                Birth_Year = personDetailsEntity.Birth_Year,
-                Height = personDetailsEntity.Height,
-                Mass = personDetailsEntity.Mass,
-                HairColor = personDetailsEntity.HairColor,
-                SkinColor = personDetailsEntity.SkinColor,
-                EyeColor = personDetailsEntity.EyeColor
-            };
-        }
-
-        public static PersonDetailsEntity ToDetailsEntity(this PersonDetailsDto personDetailsDto)
-        {
-            return new PersonDetailsEntity
             {
                 Name = personDetailsDto.Name,
                 Gender = personDetailsDto.Gender,
