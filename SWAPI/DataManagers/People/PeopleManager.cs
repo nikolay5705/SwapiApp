@@ -10,6 +10,9 @@ namespace SWAPI.DataManager.People
     public class PeopleManager : IPeopleManager
     {
         private readonly IRepository<PersonEntity> _cache;
+
+        private readonly IRepository<PersonDetailsEntity> _cacheDetails;
+
         private readonly IPeopleService _peopleService;
 
         public PeopleManager(IRepository<PersonEntity> cache, IPeopleService peopleService)
@@ -41,7 +44,21 @@ namespace SWAPI.DataManager.People
 
         public async Task<PersonDetails> GetPeopleDetailsAsync(string id)
         {
+            var cachedPerson = _cacheDetails.GetAll().FirstOrDefault(p => p.Id == id);
+
+            if (cachedPerson != null)
+            {
+                return cachedPerson.ToDetailsModel();
+            }
+
             var dto = await _peopleService.GetPersonDetailsAsync(id);
+
+            if (dto == null)
+                return null;
+
+            var entity = dto.ToDetailsEntity();
+            _cacheDetails.Add(entity);
+
             return dto.ToDetailsModel();
         }
     }
