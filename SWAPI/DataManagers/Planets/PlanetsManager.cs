@@ -4,59 +4,44 @@ using SWAPI.Models;
 using SWAPI.Models.Entities;
 using SWAPI.Services.Planets;
 
-namespace SWAPI.DataManager.Planets
+namespace SWAPI.DataManager.Planets;
+
+public class PlanetsManager(IRepository<PlanetEntity> cache, IPlanetsService planetService) : IPlanetsManager
 {
-    public class PlanetsManager : IPlanetsManager
+    public async Task<List<Planet>> GetPlanetAsync()
     {
-        private readonly IRepository<PlanetEntity> _cache;
-
-        private readonly IPlanetsService _planetService;
-
-        public PlanetsManager(IRepository<PlanetEntity> cache, IPlanetsService peopleService)
+        var cachedData = cache.GetAll();
+        if (cachedData.Any())
         {
-            _cache = cache;
-            _planetService = peopleService;
+            return cachedData.ConvertAll(item => item.ToModel());
         }
 
-        public async Task<List<Planet>> GetPlanetAsync()
+        var dataFromApi = await planetService.GetPlanetsAsync();
+
+        if (dataFromApi != null && dataFromApi.Any())
         {
-            var cached = _cache.GetAll();
-            if (cached.Any())
-            {
-                var data = cached.ConvertAll(item => item.ToModel());
-                return data;
-            }
-
-            var dataFromApi = await _planetService.GetPlanetsAsync();
-
-            if (dataFromApi != null && dataFromApi.Any())
-            {
-                var cache = dataFromApi.ConvertAll(item => item.ToEntity());
-                _cache.AddRange(cache);
-            }
-
-            var result = dataFromApi.Select(item => item.ToModel()).ToList();
-            return result;
+            var entities = dataFromApi.ConvertAll(item => item.ToEntity());
+            cache.AddRange(entities);
         }
 
-        public async Task<PlanetDetails> GetPlanetDetailsAsync(string id)
+        return dataFromApi.Select(item => item.ToModel()).ToList();
+    }
+
+    public async Task<PlanetDetails> GetPlanetDetailsAsync(string id)
+    {
+        var cachedPlanet = cache.GetById(id);
+        if (cachedPlanet != null)
         {
-            var cached = _cache.GetAll().FirstOrDefault(p => p.Id == id);
-
-            if (cached != null)
-            {
-                return cached.ToDetailsModel();
-            }
-
-            var dto = await _planetService.GetPlanetDetailsAsync(id);
-
-            if (dto == null)
-                return null;
-
-            var entity = dto.ToDetailsEntity();
-            _cache.Add(entity);
-
-            return dto.ToDetailsModel();
+            return cachedPlanet.ToDetailsModel();
         }
+
+        var dto = await planetService.GetPlanetDetailsAsync(id);
+        if (dto == null)
+            return null;
+
+        var entity = dto.ToDetailsEntity();
+        cache.Add(entity);
+
+        return dto.ToDetailsModel();
     }
 }

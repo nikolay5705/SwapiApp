@@ -2,12 +2,11 @@ using SWAPI.Models;
 using SWAPI.Models.Dtos;
 using SWAPI.Models.Entities;
 
-namespace SWAPI.Services.People
-{
-    public interface IPeopleService
-    {
-        public Task<List<PersonDto>> GetPeopleAsync();
+namespace SWAPI.Services.People;
 
-        Task<PersonDetailsDto> GetPersonDetailsAsync(string id);
-    }
+public interface IPeopleService
+{
+    public Task<List<PersonDto>> GetPeopleAsync();
+
+    Task<PersonDetailsDto> GetPersonDetailsAsync(string id);
 }

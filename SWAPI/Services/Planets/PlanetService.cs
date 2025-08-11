@@ -1,32 +1,25 @@
 using SWAPI.Caching;
+using SWAPI.Constants;
 using SWAPI.Models;
 using SWAPI.Models.Dtos;
 using SWAPI.Models.Entities;
 using SWAPI.Services.Requests;
 
-namespace SWAPI.Services.Planets
+namespace SWAPI.Services.Planets;
+
+public class PlanetService(IRequestService requestService) : IPlanetsService
 {
-    public class PlanetService : IPlanetsService
+    public async Task<List<PlanetDto>> GetPlanetsAsync()
     {
-        private readonly IRequestService _requestService;
+        string url = $"{ApiConstants.BaseUrl}/{ApiConstants.PlanetsSegment}";
+        var result = await requestService.GetAsync<CollectionResponse<PlanetDto>>(url);
+        return result.Results;
+    }
 
-        public PlanetService(IRequestService requestService)
-        {
-            _requestService = requestService;
-        }
-
-        public async Task<List<PlanetDto>> GetPlanetsAsync()
-        {
-            string url = $"https://swapi.info/api/planets";
-            var data = await _requestService.GetAsync<CollectionResponse<PlanetDto>>(url);
-
-            return data.Results;
-        }
-
-        public async Task<PlanetDetailsDto> GetPlanetDetailsAsync(string id)
-        {
-            string url = $"https://swapi.info/api/planets/{id}";
-            return await _requestService.GetAsync<PlanetDetailsDto>(url);
-        }
+    public async Task<PlanetDetailsDto> GetPlanetDetailsAsync(string id)
+    {
+        string url = $"{ApiConstants.BaseUrl}/{ApiConstants.PlanetsSegment}/{id}";
+        var result = await requestService.GetAsync<PlanetDetailsDto>(url);
+        return result;
     }
 }

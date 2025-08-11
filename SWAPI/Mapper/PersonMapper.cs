@@ -2,78 +2,77 @@ using SWAPI.Models;
 using SWAPI.Models.Dtos;
 using SWAPI.Models.Entities;
 
-namespace SWAPI.Mappers
+namespace SWAPI.Mappers;
+
+public static class PersonMapper
 {
-    public static class PersonMapper
+    public static PersonDto ToDto(this Person personModel)
     {
-        public static PersonDto ToDto(this Person personModel)
+        return new PersonDto
         {
-            return new PersonDto
-            {
-                Name = personModel.Name,
-                Gender = personModel.Gender,
-                Birth_Year = personModel.Birth_Year
-            };
-        }
+            Name = personModel.Name,
+            Gender = personModel.Gender,
+            BirthYear = personModel.BirthYear
+        };
+    }
 
-        public static PersonDto ToDto(this PersonEntity personEntity)
+    public static PersonDto ToDto(this PersonEntity personEntity)
+    {
+        return new PersonDto
         {
-            return new PersonDto
-            {
-                Name = personEntity.Name,
-                Gender = personEntity.Gender,
-                Birth_Year = personEntity.Birth_Year
-            };
-        }
+            Name = personEntity.Name,
+            Gender = personEntity.Gender,
+            BirthYear = personEntity.BirthYear
+        };
+    }
 
-        public static Person ToModel(this PersonDto personDto)
+    public static Person ToModel(this PersonDto personDto)
+    {
+        return new Person
         {
-            return new Person
-            {
-                Name = personDto.Name,
-                Gender = personDto.Gender,
-                Birth_Year = personDto.Birth_Year
-            };
-        }
+            Name = personDto.Name,
+            Gender = personDto.Gender,
+            BirthYear = personDto.BirthYear
+        };
+    }
 
-        public static Person ToModel(this PersonEntity personEntity)
+    public static Person ToModel(this PersonEntity personEntity)
+    {
+        return new Person
         {
-            return new Person
-            {
-                Name = personEntity.Name,
-                Gender = personEntity.Gender,
-                Birth_Year = personEntity.Birth_Year
-            };
-        }
+            Name = personEntity.Name,
+            Gender = personEntity.Gender,
+            BirthYear = personEntity.BirthYear
+        };
+    }
 
-        public static Person ToModel(this Person person)
+    public static Person ToModel(this Person person)
+    {
+        return new Person
         {
-            return new Person
-            {
-                Name = person.Name,
-                Gender = person.Gender,
-                Birth_Year = person.Birth_Year
-            };
-        }
+            Name = person.Name,
+            Gender = person.Gender,
+            BirthYear = person.BirthYear
+        };
+    }
 
-        public static PersonEntity ToEntity(this Person personModel)
+    public static PersonEntity ToEntity(this Person personModel)
+    {
+        return new PersonEntity
         {
-            return new PersonEntity
-            {
-                Name = personModel.Name,
-                Gender = personModel.Gender,
-                Birth_Year = personModel.Birth_Year
-            };
-        }
+            Name = personModel.Name,
+            Gender = personModel.Gender,
+            BirthYear = personModel.BirthYear
+        };
+    }
 
-        public static PersonEntity ToEntity(this PersonDto personDto)
+    public static PersonEntity ToEntity(this PersonDto personDto)
+    {
+        return new PersonEntity
         {
-            return new PersonEntity
-            {
-                Name = personDto.Name,
-                Gender = personDto.Gender,
-                Birth_Year = personDto.Birth_Year
-            };
-        }
+            Name = personDto.Name,
+            Gender = personDto.Gender,
+            BirthYear = personDto.BirthYear
+        };
     }
 }

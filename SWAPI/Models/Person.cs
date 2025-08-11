@@ -1,13 +1,12 @@
-namespace SWAPI.Models
+namespace SWAPI.Models;
+
+public class Person
 {
-    public class Person
-    {
-        public string Name { get; set; } = string.Empty;
+    public string Name { get; set; } = string.Empty;
 
-        public string Gender { get; set; } = string.Empty;
+    public string Gender { get; set; } = string.Empty;
 
-        public string Birth_Year { get; set; } = string.Empty;
+    public string BirthYear { get; set; } = string.Empty;
 
-        public string Id { get; set; } = string.Empty;
-    }
+    public string Id { get; set; } = string.Empty;
 }

@@ -1,53 +1,52 @@
 using SWAPI.DataManager.People;
 using SWAPI.Models;
 
-namespace GetAllMembers
+namespace GetAllMembers;
+
+public static class GetAllMembers
 {
-    public static class GetAllMembers
+    public static void PeopleList(List<Person> listOfPeople)
     {
-        public static void PeopleList(List<Person> listOfPeople)
+        if (listOfPeople.Any())
         {
-            if (listOfPeople.Any())
+            foreach (var person in listOfPeople)
             {
-                foreach (var person in listOfPeople)
-                {
-                    Console.WriteLine($"> Person| name: {person.Name}, gender: {person.Gender}, birth year: {person.Birth_Year}");
-                }
-            }
-            else
-            {
-                Console.WriteLine("> No people found.");
+                Console.WriteLine($"> Person| name: {person.Name}, gender: {person.Gender}, birth year: {person.BirthYear}");
             }
         }
-
-        public static void PlanetsList(List<Planet> listOfPlanets)
+        else
         {
-            if (listOfPlanets.Any())
+            Console.WriteLine("> No people found.");
+        }
+    }
+
+    public static void PlanetsList(List<Planet> listOfPlanets)
+    {
+        if (listOfPlanets.Any())
+        {
+            foreach (var planet in listOfPlanets)
             {
-                foreach (var planet in listOfPlanets)
-                {
-                    Console.WriteLine($"> Planet| name: {planet.Name}, climate: {planet.Climate}, terrain: {planet.Terrain}");
-                }
-            }
-            else
-            {
-                Console.WriteLine("> No planets found.");
+                Console.WriteLine($"> Planet| name: {planet.Name}, climate: {planet.Climate}, terrain: {planet.Terrain}");
             }
         }
-
-        public static void StarshipList(List<Starship> listOfStarships)
+        else
         {
-            if (listOfStarships.Any())
+            Console.WriteLine("> No planets found.");
+        }
+    }
+
+    public static void StarshipList(List<Starship> listOfStarships)
+    {
+        if (listOfStarships.Any())
+        {
+            foreach (var starship in listOfStarships)
             {
-                foreach (var starship in listOfStarships)
-                {
-                    Console.WriteLine($"> Starships| name: {starship.Name}, model: {starship.Model}, manufacturer: {starship.Manufacturer}");
-                }
+                Console.WriteLine($"> Starships| name: {starship.Name}, model: {starship.Model}, manufacturer: {starship.Manufacturer}");
             }
-            else
-            {
-                Console.WriteLine("> No starships found.");
-            }
+        }
+        else
+        {
+            Console.WriteLine("> No starships found.");
         }
     }
 }

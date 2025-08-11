@@ -1,13 +1,12 @@
-namespace SWAPI.Models.Entities
+namespace SWAPI.Models.Entities;
+
+public class PlanetEntity : IEntity
 {
-    public class PlanetEntity
-    {
-        public string Name { get; set; } = string.Empty;
+    public string Name { get; set; } = string.Empty;
 
-        public string Climate { get; set; } = string.Empty;
+    public string Climate { get; set; } = string.Empty;
 
-        public string Terrain { get; set; } = string.Empty;
+    public string Terrain { get; set; } = string.Empty;
 
-        public string Id { get; set; } = string.Empty;
-    }
+    public string Id { get; set; } = string.Empty;
 }

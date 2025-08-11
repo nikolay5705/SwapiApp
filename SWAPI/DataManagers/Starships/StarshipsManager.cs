@@ -5,59 +5,44 @@ using SWAPI.Models.Dtos;
 using SWAPI.Models.Entities;
 using SWAPI.Services.Starships;
 
-namespace SWAPI.DataManager.Starships
+namespace SWAPI.DataManager.Starships;
+
+public class StarshipsManager(IRepository<StarshipEntity> cache, IStarshipsService starshipService) : IStarshipsManager
 {
-    public class StarshipsManager : IStarshipsManager
+    public async Task<List<Starship>> GetStarshipsAsync()
     {
-        private readonly IRepository<StarshipEntity> _cache;
-
-        private readonly IStarshipsService _starshipService;
-
-        public StarshipsManager(IRepository<StarshipEntity> cache, IStarshipsService starshipService)
+        var cachedData = cache.GetAll();
+        if (cachedData.Any())
         {
-            _cache = cache;
-            _starshipService = starshipService;
+            return cachedData.ConvertAll(item => item.ToModel());
         }
 
-        public async Task<List<Starship>> GetStarshipsAsync()
+        var dataFromApi = await starshipService.GetStarshipsAsync();
+
+        if (dataFromApi != null && dataFromApi.Any())
         {
-            var cached = _cache.GetAll();
-            if (cached.Any())
-            {
-                var data = cached.ConvertAll(item => item.ToModel());
-                return data;
-            }
-
-            var dataFromApi = await _starshipService.GetStarshipsAsync();
-
-            if (dataFromApi != null && dataFromApi.Any())
-            {
-                var cache = dataFromApi.ConvertAll(item => item.ToEntity());
-                _cache.AddRange(cache);
-            }
-
-            var result = dataFromApi.Select(item => item.ToModel()).ToList();
-            return result;
+            var entities = dataFromApi.ConvertAll(item => item.ToEntity());
+            cache.AddRange(entities);
         }
 
-        public async Task<StarshipDetails> GetStarshipDetailsAsync(string id)
+        return dataFromApi.Select(item => item.ToModel()).ToList();
+    }
+
+    public async Task<StarshipDetails> GetStarshipDetailsAsync(string id)
+    {
+        var cachedStarship = cache.GetById(id);
+        if (cachedStarship != null)
         {
-            var cached = _cache.GetAll().FirstOrDefault(s => s.Id == id);
-
-            if (cached != null)
-            {
-                return cached.ToDetailsModel();
-            }
-
-            var dto = await _starshipService.GetStarshipDetailsAsync(id);
-
-            if (dto == null)
-                return null;
-
-            var entity = dto.ToDetailsEntity();
-            _cache.Add(entity);
-
-            return dto.ToDetailsModel();
+            return cachedStarship.ToDetailsModel();
         }
+
+        var dto = await starshipService.GetStarshipDetailsAsync(id);
+        if (dto == null)
+            return null;
+
+        var entity = dto.ToDetailsEntity();
+        cache.Add(entity);
+
+        return dto.ToDetailsModel();
     }
 }

@@ -5,59 +5,44 @@ using SWAPI.Models.Dtos;
 using SWAPI.Models.Entities;
 using SWAPI.Services.People;
 
-namespace SWAPI.DataManager.People
+namespace SWAPI.DataManager.People;
+
+public class PeopleManager(IRepository<PersonEntity> cache, IPeopleService peopleService) : IPeopleManager
 {
-    public class PeopleManager : IPeopleManager
+    public async Task<List<Person>> GetPeopleAsync()
     {
-        private readonly IRepository<PersonEntity> _cache;
-
-        private readonly IPeopleService _peopleService;
-
-        public PeopleManager(IRepository<PersonEntity> cache, IPeopleService peopleService)
+        var cachedData = cache.GetAll();
+        if (cachedData.Any())
         {
-            _cache = cache;
-            _peopleService = peopleService;
+            return cachedData.ConvertAll(item => item.ToModel());
         }
 
-        public async Task<List<Person>> GetPeopleAsync()
+        var dataFromApi = await peopleService.GetPeopleAsync();
+
+        if (dataFromApi != null && dataFromApi.Any())
         {
-            var cached = _cache.GetAll();
-            if (cached.Any())
-            {
-                var data = cached.ConvertAll(item => item.ToModel());
-                return data;
-            }
-
-            var dataFromApi = await _peopleService.GetPeopleAsync();
-
-            if (dataFromApi != null && dataFromApi.Any())
-            {
-                var cache = dataFromApi.ConvertAll(item => item.ToEntity());
-                _cache.AddRange(cache);
-            }
-
-            var result = dataFromApi.Select(item => item.ToModel()).ToList();
-            return result;
+            var entities = dataFromApi.ConvertAll(item => item.ToEntity());
+            cache.AddRange(entities);
         }
 
-        public async Task<PersonDetails> GetPeopleDetailsAsync(string id)
+        return dataFromApi.Select(item => item.ToModel()).ToList();
+    }
+
+    public async Task<PersonDetails> GetPeopleDetailsAsync(string id)
+    {
+        var cachedPerson = cache.GetById(id);
+        if (cachedPerson != null)
         {
-            var cached = _cache.GetAll().FirstOrDefault(p => p.Id == id);
-
-            if (cached != null)
-            {
-                return cached.ToDetailsModel();
-            }
-
-            var dto = await _peopleService.GetPersonDetailsAsync(id);
-
-            if (dto == null)
-                return null;
-
-            var entity = dto.ToDetailsEntity();
-            _cache.Add(entity);
-
-            return dto.ToDetailsModel();
+            return cachedPerson.ToDetailsModel();
         }
+
+        var dto = await peopleService.GetPersonDetailsAsync(id);
+        if (dto == null)
+            return null;
+
+        var entity = dto.ToDetailsEntity();
+        cache.Add(entity);
+
+        return dto.ToDetailsModel();
     }
 }

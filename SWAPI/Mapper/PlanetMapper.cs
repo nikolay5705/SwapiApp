@@ -2,78 +2,77 @@ using SWAPI.Models;
 using SWAPI.Models.Dtos;
 using SWAPI.Models.Entities;
 
-namespace SWAPI.Mappers
+namespace SWAPI.Mappers;
+
+public static class PlanetMapper
 {
-    public static class PlanetMapper
+    public static PlanetDto ToDto(this Planet planetModel)
     {
-        public static PlanetDto ToDto(this Planet planetModel)
+        return new PlanetDto
         {
-            return new PlanetDto
-            {
-                Name = planetModel.Name,
-                Climate = planetModel.Climate,
-                Terrain = planetModel.Terrain
-            };
-        }
+            Name = planetModel.Name,
+            Climate = planetModel.Climate,
+            Terrain = planetModel.Terrain
+        };
+    }
 
-        public static PlanetDto ToDto(this PlanetEntity planetEntity)
+    public static PlanetDto ToDto(this PlanetEntity planetEntity)
+    {
+        return new PlanetDto
         {
-            return new PlanetDto
-            {
-                Name = planetEntity.Name,
-                Climate = planetEntity.Climate,
-                Terrain = planetEntity.Terrain
-            };
-        }
+            Name = planetEntity.Name,
+            Climate = planetEntity.Climate,
+            Terrain = planetEntity.Terrain
+        };
+    }
 
-        public static Planet ToModel(this PlanetDto planetDto)
+    public static Planet ToModel(this PlanetDto planetDto)
+    {
+        return new Planet
         {
-            return new Planet
-            {
-                Name = planetDto.Name,
-                Climate = planetDto.Climate,
-                Terrain = planetDto.Terrain
-            };
-        }
+            Name = planetDto.Name,
+            Climate = planetDto.Climate,
+            Terrain = planetDto.Terrain
+        };
+    }
 
-        public static Planet ToModel(this Planet planet)
+    public static Planet ToModel(this Planet planet)
+    {
+        return new Planet
         {
-            return new Planet
-            {
-                Name = planet.Name,
-                Climate = planet.Climate,
-                Terrain = planet.Terrain
-            };
-        }
+            Name = planet.Name,
+            Climate = planet.Climate,
+            Terrain = planet.Terrain
+        };
+    }
 
-        public static Planet ToModel(this PlanetEntity entity)
+    public static Planet ToModel(this PlanetEntity entity)
+    {
+        return new Planet
         {
-            return new Planet
-            {
-                Name = entity.Name,
-                Climate = entity.Climate,
-                Terrain = entity.Terrain
-            };
-        }
+            Name = entity.Name,
+            Climate = entity.Climate,
+            Terrain = entity.Terrain
+        };
+    }
 
-        public static PlanetEntity ToEntity(this Planet planetModel)
+    public static PlanetEntity ToEntity(this Planet planetModel)
+    {
+        return new PlanetEntity
         {
-            return new PlanetEntity
-            {
-                Name = planetModel.Name,
-                Climate = planetModel.Climate,
-                Terrain = planetModel.Terrain
-            };
-        }
+            Name = planetModel.Name,
+            Climate = planetModel.Climate,
+            Terrain = planetModel.Terrain
+        };
+    }
 
-        public static PlanetEntity ToEntity(this PlanetDto planetDto)
+    public static PlanetEntity ToEntity(this PlanetDto planetDto)
+    {
+        return new PlanetEntity
         {
-            return new PlanetEntity
-            {
-                Name = planetDto.Name,
-                Climate = planetDto.Climate,
-                Terrain = planetDto.Terrain
-            };
-        }
+            Name = planetDto.Name,
+            Climate = planetDto.Climate,
+            Terrain = planetDto.Terrain
+        };
     }
 }

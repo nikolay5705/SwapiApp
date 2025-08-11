@@ -1,17 +1,19 @@
 using SWAPI.Models.Entities;
 
-namespace SWAPI.Caching
+namespace SWAPI.Caching;
+
+public interface IRepository<T>
+    where T : IEntity
 {
-    public interface IRepository<T>
-    {
-        void Add(T item);
+    T? GetById(string id);
 
-        void AddRange(IEnumerable<T> items);
+    void Add(T item);
 
-        List<T> GetAll();
+    void AddRange(IEnumerable<T> items);
 
-        void Delete(T item);
+    List<T> GetAll();
 
-        void Clean();
-    }
+    void Delete(T item);
+
+    void Clean();
 }
