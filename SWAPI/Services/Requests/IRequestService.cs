@@ -1,6 +1,7 @@
-namespace SWAPI.Services.Requests;
-
-public interface IRequestService
+namespace SWAPI.Services.Requests
 {
-    public Task<T> GetAsync<T>(string url);
+    public interface IRequestService
+    {
+        public Task<T> GetAsync<T>(string url);
+    }
 }
