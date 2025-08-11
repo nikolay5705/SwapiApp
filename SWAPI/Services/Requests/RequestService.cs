@@ -1,21 +1,21 @@
 using System.Text.Json;
+using SWAPI.Caching;
 
-namespace SWAPI.Services.Requests
+namespace SWAPI.Services.Requests;
+
+public class RequestService : IRequestService
 {
-    public class RequestService : IRequestService
+    private readonly HttpClient _httpClient = new HttpClient();
+
+    public async Task<T> GetAsync<T>(string url)
     {
-        private readonly HttpClient _httpClient = new HttpClient();
+        var jsonOption = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
 
-        public async Task<T> GetAsync<T>(string url)
-        {
-            var jsonOption = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+        HttpResponseMessage response = await _httpClient.GetAsync(url);
+        response.EnsureSuccessStatusCode();
 
-            HttpResponseMessage response = await _httpClient.GetAsync(url);
-            response.EnsureSuccessStatusCode();
-
-            string responseBody = await response.Content.ReadAsStringAsync();
-            var data = JsonSerializer.Deserialize<T>(responseBody, jsonOption);
-            return data;
-        }
+        string responseBody = await response.Content.ReadAsStringAsync();
+        var data = JsonSerializer.Deserialize<T>(responseBody, jsonOption);
+        return data;
     }
 }

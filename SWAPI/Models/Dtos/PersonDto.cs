@@ -1,6 +1,6 @@
-namespace SWAPI.Models;
+namespace SWAPI.Models.Dtos;
 
-public class Person
+public class PersonDto
 {
     public string Name { get; set; } = string.Empty;
 
@@ -8,5 +8,5 @@ public class Person
 
     public string BirthYear { get; set; } = string.Empty;
 
-    public string Id { get; set; } = string.Empty;
+    public string Url { get; set; } = string.Empty;
 }

@@ -1,6 +1,6 @@
-namespace SWAPI.Models;
+namespace SWAPI.Models.Entities;
 
-public class Starship
+public class StarshipEntity : IEntity
 {
     public string Name { get; set; } = string.Empty;
 

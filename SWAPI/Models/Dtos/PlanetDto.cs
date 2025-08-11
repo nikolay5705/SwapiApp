@@ -1,6 +1,6 @@
-namespace SWAPI.Models;
+namespace SWAPI.Models.Dtos;
 
-public class Planet
+public class PlanetDto
 {
     public string Name { get; set; } = string.Empty;
 
@@ -8,5 +8,5 @@ public class Planet
 
     public string Terrain { get; set; } = string.Empty;
 
-    public string Id { get; set; } = string.Empty;
+    public string Url { get; set; } = string.Empty;
 }

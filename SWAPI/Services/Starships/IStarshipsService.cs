@@ -1,9 +1,12 @@
 using SWAPI.Models;
+using SWAPI.Models.Dtos;
+using SWAPI.Models.Entities;
 
-namespace SWAPI.Services.Starships
+namespace SWAPI.Services.Starships;
+
+public interface IStarshipsService
 {
-    public interface IStarshipsService
-    {
-        public Task<List<Starship>> GetStarshipsAsync();
-    }
+    public Task<List<StarshipDto>> GetStarshipsAsync();
+
+    Task<StarshipDetailsDto> GetStarshipDetailsAsync(string id);
 }
