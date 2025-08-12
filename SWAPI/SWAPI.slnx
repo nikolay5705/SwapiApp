@@ -1,0 +1,14 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="iPhone" />
+  </Configurations>
+  <Project Path="SwapiMaui\SwapiMaui.csproj" Type="Classic C#">
+    <Configuration Solution="Debug|iPhone" Project="Debug|Any CPU" />
+    <Configuration Solution="Release|iPhone" Project="Release|Any CPU" />
+  </Project>
+  <Project Path="Swapi\SWAPI.csproj" Type="Classic C#">
+    <Configuration Solution="Debug|iPhone" Project="Debug|Any CPU" />
+    <Configuration Solution="Release|iPhone" Project="Release|Any CPU" />
+  </Project>
+</Solution>
