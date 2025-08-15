@@ -1,4 +1,4 @@
-using SWAPI.DataManager.People;
+﻿using SWAPI.DataManager.People;
 using SWAPI.Models;
 
 namespace GetAllMembers;

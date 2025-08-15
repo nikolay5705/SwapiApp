@@ -1,4 +1,4 @@
-namespace SWAPI.Validation;
+﻿namespace SWAPI.Validation;
 
 public static class ValidationData
 {

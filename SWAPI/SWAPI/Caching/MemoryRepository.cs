@@ -1,4 +1,4 @@
-using SWAPI.Models.Entities;
+﻿using SWAPI.Models.Entities;
 
 namespace SWAPI.Caching;
 

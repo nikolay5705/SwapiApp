@@ -1,4 +1,4 @@
-using SWAPI.Models;
+﻿using SWAPI.Models;
 
 namespace SWAPI.Utils;
 

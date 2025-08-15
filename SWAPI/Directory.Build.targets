@@ -1,7 +1,7 @@
 <Project>
 
 	<PropertyGroup>
-		<LangVersion>14.0</LangVersion>
+		<LangVersion>13.0</LangVersion>
 	</PropertyGroup>
 
 	<Import Project="$(MSBuildThisFileDirectory)\CodeStyles.targets" />

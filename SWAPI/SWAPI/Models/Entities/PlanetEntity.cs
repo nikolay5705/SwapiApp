@@ -1,4 +1,4 @@
-namespace SWAPI.Models.Entities;
+﻿namespace SWAPI.Models.Entities;
 
 public class PlanetEntity : IEntity
 {

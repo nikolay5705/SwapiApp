@@ -1,4 +1,4 @@
-namespace SWAPI.Utils;
+﻿namespace SWAPI.Utils;
 
 public static class Utils
 {
