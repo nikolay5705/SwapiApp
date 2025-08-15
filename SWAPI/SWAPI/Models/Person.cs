@@ -1,4 +1,4 @@
-namespace SWAPI.Models;
+﻿namespace SWAPI.Models;
 
 public class Person
 {

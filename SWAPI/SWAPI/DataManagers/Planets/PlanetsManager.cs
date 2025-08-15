@@ -1,4 +1,4 @@
-using SWAPI.Caching;
+﻿using SWAPI.Caching;
 using SWAPI.Mappers;
 using SWAPI.Models;
 using SWAPI.Models.Entities;

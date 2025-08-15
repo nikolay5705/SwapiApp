@@ -1,4 +1,4 @@
-namespace SWAPI.Constants;
+﻿namespace SWAPI.Constants;
 
 public static class ApiConstants
 {

@@ -1,4 +1,4 @@
-using SWAPI.Models;
+﻿using SWAPI.Models;
 using SWAPI.Models.Entities;
 
 namespace SWAPI.DataManager.People;
