@@ -4,9 +4,23 @@ namespace SwapiMaui;
 
 public partial class MainPage : ContentPage
 {
-    public MainPage()
+    private readonly MainViewModel _viewModel;
+
+    public MainPage(MainViewModel viewModel)
     {
         InitializeComponent();
-        BindingContext = new MainViewModel();
+
+        _viewModel = viewModel;
+        BindingContext = _viewModel;
+    }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+
+        if (_viewModel.People == null || !_viewModel.People.Any())
+        {
+            await _viewModel.LoadPeopleAsync();
+        }
     }
 }

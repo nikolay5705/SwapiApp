@@ -1,23 +1,51 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using System.Collections.ObjectModel;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using SWAPI.Caching;
+using SWAPI.DataManager.People;
+using SWAPI.DataManager.Planets;
+using SWAPI.DataManager.Starships;
+using SWAPI.Mappers;
+using SWAPI.Models.Entities;
+using SWAPI.Services.People;
+using SWAPI.Services.Planets;
+using SWAPI.Services.Requests;
+using SWAPI.Services.Starships;
+using SwapiMaui;
+using SwapiMaui.ViewModels;
 
 namespace SwapiMaui.ViewModels;
 
 public partial class MainViewModel : ViewModelBase
 {
-    public MainViewModel()
+    private readonly IPeopleService _peopleService;
+
+    public MainViewModel(IPeopleService peopleService)
     {
-        IncreaseCommand = new RelayCommand(Increase);
-        DecreaseCommand = new RelayCommand(Decrease);
+        _peopleService = peopleService;
+
+        People = new ObservableCollection<PersonEntity>();
     }
 
-    public int Count { get; set; } = 0;
+    public ObservableCollection<PersonEntity> People { get; set; }
 
-    public IRelayCommand IncreaseCommand { get; }
+    public async Task LoadPeopleAsync()
+    {
+        await GetPeopleAsync();
+    }
 
-    public IRelayCommand DecreaseCommand { get; }
+    private async Task GetPeopleAsync()
+    {
+        var listOfPeople = await _peopleService.GetPeopleAsync();
 
-    private void Increase() => Count++;
+        People.Clear();
 
-    private void Decrease() => Count--;
+        if (listOfPeople?.Any() == true)
+        {
+            foreach (var person in listOfPeople)
+            {
+                People.Add(person.ToEntity());
+            }
+        }
+    }
 }
