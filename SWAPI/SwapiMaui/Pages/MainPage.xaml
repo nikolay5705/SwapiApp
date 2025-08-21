@@ -1,14 +1,20 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SwapiMaui.MainPage">
-
-    <CollectionView ItemsSource="{Binding People}">
-        <CollectionView.ItemTemplate>
-            <DataTemplate>
-                <Label Text="{Binding Name}" />
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
-    </CollectionView>
-
+    <ScrollView>
+        <VerticalStackLayout HorizontalOptions="Center">
+            <Label Text="List of people:" FontSize="20" TextColor="DarkSlateGray" Margin="15" />
+            <CollectionView ItemsSource="{Binding People}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Stroke="Gray" StrokeThickness="1">
+                            <Label Text="{Binding Name}" FontSize="20" TextColor="DarkSlateGray" />
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

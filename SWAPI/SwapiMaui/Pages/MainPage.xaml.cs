@@ -1,4 +1,5 @@
-﻿using SwapiMaui.ViewModels;
+﻿using SWAPI.Services.People;
+using SwapiMaui.ViewModels;
 
 namespace SwapiMaui;
 
@@ -6,21 +7,16 @@ public partial class MainPage : ContentPage
 {
     private readonly MainViewModel _viewModel;
 
-    public MainPage(MainViewModel viewModel)
+    public MainPage(IPeopleService peopleService)
     {
         InitializeComponent();
-
-        _viewModel = viewModel;
+        _viewModel = new MainViewModel(peopleService);
         BindingContext = _viewModel;
     }
 
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-
-        if (_viewModel.People == null || !_viewModel.People.Any())
-        {
-            await _viewModel.LoadPeopleAsync();
-        }
+        await _viewModel.LoadPeopleAsync();
     }
 }
