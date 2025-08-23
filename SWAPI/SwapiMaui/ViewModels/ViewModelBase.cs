@@ -6,8 +6,6 @@ namespace SwapiMaui.ViewModels;
 
 public abstract class ViewModelBase : ObservableObject, INotifyPropertyChanged
 {
-    private bool _isInitialized;
-
     protected ViewModelBase()
     {
         InitCommand = new AsyncRelayCommand(InitializeAsync);
@@ -17,14 +15,9 @@ public abstract class ViewModelBase : ObservableObject, INotifyPropertyChanged
 
     public IAsyncRelayCommand InitCommand { get; }
 
-    public virtual async Task OnNavigatedToAsync()
+    public virtual void OnNavigatedTo()
     {
-        if (_isInitialized)
-            return;
-
-        _isInitialized = true;
-
-        await InitCommand.ExecuteAsync(null);
+        InitCommand.Execute(null);
     }
 
     protected virtual Task InitializeAsync()
