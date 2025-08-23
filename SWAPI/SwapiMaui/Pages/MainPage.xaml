@@ -7,7 +7,7 @@
     <Grid RowDefinitions="Auto, *" Padding="10">
         <Label Text="List of people:" FontSize="20" TextColor="DarkSlateGray" Grid.Row="0" />
         
-        <CollectionView ItemsSource="{Binding PeopleViewModel.People}" Grid.Row="1">
+        <CollectionView ItemsSource="{Binding People}" Grid.Row="1">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Border Stroke="Gray" StrokeThickness="1" Margin="5">
