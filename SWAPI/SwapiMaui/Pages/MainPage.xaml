@@ -1,26 +1,20 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SwapiMaui.MainPage">
 
-    <ScrollView>
-            <Grid RowDefinitions="*,Auto" ColumnDefinitions="*,*"
-                  Padding="30" RowSpacing="25" ColumnSpacing="10">
-
-                <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
-                       Text="{Binding Count}"
-                       FontSize="48"
-                       HorizontalOptions="Center"
-                       VerticalOptions="Center"/>
-
-                <Button Grid.Row="1" Grid.Column="0"
-                        Text="Increase"
-                        Command="{Binding IncreaseCommand}"/>
-
-                <Button Grid.Row="1" Grid.Column="1"
-                        Text="Decrease"
-                        Command="{Binding DecreaseCommand}"/>
-            </Grid>
-    </ScrollView>
-
+    <Grid RowDefinitions="Auto, *" Padding="10">
+        <Label Text="List of people:" FontSize="20" TextColor="DarkSlateGray" Grid.Row="0" />
+        
+        <CollectionView ItemsSource="{Binding People}" Grid.Row="1">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border Stroke="Gray" StrokeThickness="1" Margin="5">
+                        <Label Text="{Binding Name}" FontSize="18" TextColor="DarkSlateGray" Padding="10"/>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
 </ContentPage>

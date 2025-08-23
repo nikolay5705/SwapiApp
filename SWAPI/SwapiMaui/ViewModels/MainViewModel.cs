@@ -1,23 +1,38 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
+﻿using System.Collections.ObjectModel;
+using SWAPI.DataManager.People;
+using SWAPI.Mappers;
+using SWAPI.Models.Entities;
 
 namespace SwapiMaui.ViewModels;
 
-public partial class MainViewModel : ViewModelBase
+public class MainViewModel : ViewModelBase
 {
-    public MainViewModel()
+    private readonly IPeopleManager _peopleManager;
+
+    public MainViewModel(IPeopleManager peopleManager)
     {
-        IncreaseCommand = new RelayCommand(Increase);
-        DecreaseCommand = new RelayCommand(Decrease);
+        _peopleManager = peopleManager;
+        OnNavigatedTo();
     }
 
-    public int Count { get; set; } = 0;
+    public ObservableCollection<PersonItemViewModel> People { get; } = new();
 
-    public IRelayCommand IncreaseCommand { get; }
+    protected override async Task InitializeAsync()
+    {
+        try
+        {
+            People.Clear();
+            var listOfPeople = await _peopleManager.GetPeopleAsync();
 
-    public IRelayCommand DecreaseCommand { get; }
-
-    private void Increase() => Count++;
-
-    private void Decrease() => Count--;
+            if (listOfPeople?.Any() == true)
+            {
+                foreach (var person in listOfPeople)
+                    People.Add(new PersonItemViewModel(person));
+            }
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine(ex.Message);
+        }
+    }
 }

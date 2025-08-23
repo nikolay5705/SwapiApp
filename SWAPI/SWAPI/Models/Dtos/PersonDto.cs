@@ -1,4 +1,6 @@
-﻿namespace SWAPI.Models.Dtos;
+﻿using System.Text.Json.Serialization;
+
+namespace SWAPI.Models.Dtos;
 
 public class PersonDto
 {
@@ -6,6 +8,7 @@ public class PersonDto
 
     public string Gender { get; set; } = string.Empty;
 
+    [JsonPropertyName("birth_year")]
     public string BirthYear { get; set; } = string.Empty;
 
     public string Url { get; set; } = string.Empty;

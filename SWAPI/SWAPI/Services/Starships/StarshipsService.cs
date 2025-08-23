@@ -12,9 +12,8 @@ public class StarshipsService(IRequestService requestService) : IStarshipsServic
     public async Task<List<StarshipDto>> GetStarshipsAsync()
     {
         string url = $"{ApiConstants.BaseUrl}/{ApiConstants.StarshipsSegment}";
-        var result = await requestService.GetAsync<CollectionResponse<StarshipDto>>(url);
-
-        return result.Results;
+        var result = await requestService.GetAsync<List<StarshipDto>>(url);
+        return result;
     }
 
     public async Task<StarshipDetailsDto> GetStarshipDetailsAsync(string id)

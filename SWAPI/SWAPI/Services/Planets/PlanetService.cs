@@ -12,8 +12,8 @@ public class PlanetService(IRequestService requestService) : IPlanetsService
     public async Task<List<PlanetDto>> GetPlanetsAsync()
     {
         string url = $"{ApiConstants.BaseUrl}/{ApiConstants.PlanetsSegment}";
-        var result = await requestService.GetAsync<CollectionResponse<PlanetDto>>(url);
-        return result.Results;
+        var result = await requestService.GetAsync<List<PlanetDto>>(url);
+        return result;
     }
 
     public async Task<PlanetDetailsDto> GetPlanetDetailsAsync(string id)
