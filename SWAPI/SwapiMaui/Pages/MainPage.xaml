@@ -4,17 +4,63 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SwapiMaui.MainPage">
 
-    <Grid RowDefinitions="Auto, *" Padding="10">
-        <Label Text="List of people:" FontSize="20" TextColor="DarkSlateGray" Grid.Row="0" />
-        
+    <Grid RowDefinitions="Auto,*" ColumnDefinitions="*"
+          Margin="12 ,89,0,0">
+        <Grid Grid.Row="0" ColumnDefinitions="*,Auto">
+            <Border Stroke="LightGray"
+                    StrokeShape="RoundRectangle 8"
+                    BackgroundColor="White"
+                    HeightRequest="40"
+                    WidthRequest="351"
+                    Margin="0,0,0,12">
+
+                <Grid>
+                    <Entry Placeholder="Search people"
+                           Text="{Binding SearchText}"
+                           PlaceholderColor="#8E95A4"
+                           TextColor="Black"
+                           BackgroundColor="Transparent"
+                           FontSize="16"
+                           HorizontalOptions="FillAndExpand"
+                           VerticalOptions="Center"/>
+
+                   
+                    <Image Source="search_icon.png"
+                           Aspect="AspectFit"
+                           HeightRequest="20"
+                           WidthRequest="20"
+                           VerticalOptions="Center"
+                           HorizontalOptions="End"
+                           Margin="0,0,10,0" /> 
+                </Grid>
+            </Border>
+        </Grid>
+
         <CollectionView ItemsSource="{Binding People}" Grid.Row="1">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Border Stroke="Gray" StrokeThickness="1" Margin="5">
-                        <Label Text="{Binding Name}" FontSize="18" TextColor="DarkSlateGray" Padding="10"/>
+                    <Border Stroke="Gray"
+                            StrokeThickness="1"
+                            WidthRequest="351"
+                            HeightRequest="68"
+                            StrokeShape="RoundRectangle 8"
+                            Margin="0,0,0,12"
+                            Padding="10,10,0,0">
+
+                        <Label Text="{Binding Name}"
+                               FontSize="14"
+                               TextColor="#333333" />
                     </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+
+
     </Grid>
+
+    <!-- <Grid RowDefinitions="Auto, *" Padding="10"> -->
+    <!--     <Label Text="List of people:" FontSize="20" TextColor="DarkSlateGray" Grid.Row="0" /> -->
+    <!-- -->
+
+    <!-- </Grid> -->
 </ContentPage>

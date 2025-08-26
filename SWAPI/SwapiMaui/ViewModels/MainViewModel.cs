@@ -9,6 +9,10 @@ public class MainViewModel : ViewModelBase
 {
     private readonly IPeopleManager _peopleManager;
 
+    private string _searchText = string.Empty;
+
+    private List<PersonItemViewModel> _allPeople = new();
+
     public MainViewModel(IPeopleManager peopleManager)
     {
         _peopleManager = peopleManager;
@@ -16,6 +20,19 @@ public class MainViewModel : ViewModelBase
     }
 
     public ObservableCollection<PersonItemViewModel> People { get; } = new();
+
+    public string SearchText
+    {
+        get => _searchText;
+        set
+        {
+            if (_searchText != value)
+            {
+                _searchText = value;
+                FilterPeople(_searchText);
+            }
+        }
+    }
 
     protected override async Task InitializeAsync()
     {
@@ -26,13 +43,30 @@ public class MainViewModel : ViewModelBase
 
             if (listOfPeople?.Any() == true)
             {
-                foreach (var person in listOfPeople)
-                    People.Add(new PersonItemViewModel(person));
+                _allPeople = listOfPeople
+                    .Select(p => new PersonItemViewModel(p))
+                    .ToList();
+
+                foreach (var person in _allPeople)
+                    People.Add(person);
             }
         }
         catch (Exception ex)
         {
             System.Diagnostics.Debug.WriteLine(ex.Message);
         }
+    }
+
+    private void FilterPeople(string text)
+    {
+        People.Clear();
+
+        var filtered = string.IsNullOrWhiteSpace(text)
+            ? _allPeople
+            : _allPeople.Where(p =>
+                p.Name.Contains(text, StringComparison.OrdinalIgnoreCase));
+
+        foreach (var person in filtered)
+            People.Add(person);
     }
 }
