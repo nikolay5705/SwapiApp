@@ -11,5 +11,9 @@ public class PersonDto
     [JsonPropertyName("birth_year")]
     public string BirthYear { get; set; } = string.Empty;
 
+    public string Height { get; set; } = string.Empty;
+
+    public string Mass { get; set; } = string.Empty;
+
     public string Url { get; set; } = string.Empty;
 }

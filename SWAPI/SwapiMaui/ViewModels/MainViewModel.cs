@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using SWAPI.DataManager.People;
 using SWAPI.Mappers;
+using SWAPI.Models;
 using SWAPI.Models.Entities;
 
 namespace SwapiMaui.ViewModels;

@@ -8,5 +8,9 @@ public class PersonEntity : IEntity
 
     public string BirthYear { get; set; } = string.Empty;
 
+    public string Height { get; set; } = string.Empty;
+
+    public string Mass { get; set; } = string.Empty;
+
     public string Id { get; set; } = string.Empty;
 }
