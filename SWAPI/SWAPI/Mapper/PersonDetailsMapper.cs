@@ -13,6 +13,8 @@ public static class PersonDetailsMapper
             Id = Utils.Utils.ExtractIdFromUrl(personDto.Url),
             Name = personDto.Name,
             Gender = personDto.Gender,
+            Mass = personDto.Mass,
+            Height = personDto.Height,
             BirthYear = personDto.BirthYear
         };
     }
@@ -24,6 +26,8 @@ public static class PersonDetailsMapper
             Id = personEntity.Id,
             Name = personEntity.Name,
             Gender = personEntity.Gender,
+            Mass = personEntity.Mass,
+            Height = personEntity.Height,
             BirthYear = personEntity.BirthYear,
         };
     }
@@ -34,6 +38,8 @@ public static class PersonDetailsMapper
         {
             Name = personDetailsDto.Name,
             Gender = personDetailsDto.Gender,
+            Mass = personDetailsDto.Mass,
+            Height = personDetailsDto.Height,
             BirthYear = personDetailsDto.BirthYear
         };
     }

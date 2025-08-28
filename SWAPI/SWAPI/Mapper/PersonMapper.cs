@@ -12,6 +12,8 @@ public static class PersonMapper
         {
             Name = personModel.Name,
             Gender = personModel.Gender,
+            Height = personModel.Height,
+            Mass = personModel.Mass,
             BirthYear = personModel.BirthYear
         };
     }
@@ -22,6 +24,8 @@ public static class PersonMapper
         {
             Name = personEntity.Name,
             Gender = personEntity.Gender,
+            Height = personEntity.Height,
+            Mass = personEntity.Mass,
             BirthYear = personEntity.BirthYear
         };
     }
@@ -32,6 +36,8 @@ public static class PersonMapper
         {
             Name = personDto.Name,
             Gender = personDto.Gender,
+            Height = personDto.Height,
+            Mass = personDto.Mass,
             BirthYear = personDto.BirthYear
         };
     }
@@ -42,6 +48,8 @@ public static class PersonMapper
         {
             Name = personEntity.Name,
             Gender = personEntity.Gender,
+            Height = personEntity.Height,
+            Mass = personEntity.Mass,
             BirthYear = personEntity.BirthYear
         };
     }
@@ -52,6 +60,8 @@ public static class PersonMapper
         {
             Name = person.Name,
             Gender = person.Gender,
+            Height = person.Height,
+            Mass = person.Mass,
             BirthYear = person.BirthYear
         };
     }
@@ -62,6 +72,8 @@ public static class PersonMapper
         {
             Name = personModel.Name,
             Gender = personModel.Gender,
+            Height = personModel.Height,
+            Mass = personModel.Mass,
             BirthYear = personModel.BirthYear
         };
     }
@@ -72,6 +84,8 @@ public static class PersonMapper
         {
             Name = personDto.Name,
             Gender = personDto.Gender,
+            Height = personDto.Height,
+            Mass = personDto.Mass,
             BirthYear = personDto.BirthYear
         };
     }
