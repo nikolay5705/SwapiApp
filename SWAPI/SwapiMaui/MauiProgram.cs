@@ -8,6 +8,7 @@ using SWAPI.Services.People;
 using SWAPI.Services.Planets;
 using SWAPI.Services.Requests;
 using SWAPI.Services.Starships;
+using SwapiMaui.Pages;
 using SwapiMaui.ViewModels;
 
 namespace SwapiMaui;
@@ -40,6 +41,10 @@ public static class MauiProgram
 
         // ViewModels
         builder.Services.AddSingleton<MainViewModel>();
+        builder.Services.AddTransient<PersonDetailViewModel>();
+
+        // Pages
+        builder.Services.AddSingleton<MainPage>();
 
 #if DEBUG
         builder.Logging.AddDebug();

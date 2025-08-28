@@ -1,4 +1,5 @@
-﻿using SwapiMaui.ViewModels;
+﻿using SwapiMaui.Pages;
+using SwapiMaui.ViewModels;
 
 namespace SwapiMaui;
 
