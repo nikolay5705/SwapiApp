@@ -21,5 +21,7 @@ public class PersonItemViewModel
 
     public string Gender { get; set; } = string.Empty;
 
+    public string Id { get; set; } = string.Empty;
+
     public string GenderImage { get; set; } = string.Empty;
 }

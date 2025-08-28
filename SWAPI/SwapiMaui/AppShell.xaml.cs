@@ -1,4 +1,6 @@
-﻿namespace SwapiMaui;
+﻿using SwapiMaui.Pages;
+
+namespace SwapiMaui;
 
 public partial class AppShell : Shell
 {

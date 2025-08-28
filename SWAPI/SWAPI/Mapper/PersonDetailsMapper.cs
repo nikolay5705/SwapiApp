@@ -32,6 +32,19 @@ public static class PersonDetailsMapper
         };
     }
 
+    public static Person ToModel(this PersonDetails personDetails)
+    {
+        return new Person
+        {
+            Id = personDetails.Id,
+            Name = personDetails.Name,
+            Gender = personDetails.Gender,
+            Mass = personDetails.Mass,
+            Height = personDetails.Height,
+            BirthYear = personDetails.BirthYear,
+        };
+    }
+
     public static PersonEntity ToDetailsEntity(this PersonDetailsDto personDetailsDto)
     {
         return new PersonEntity

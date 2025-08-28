@@ -1,9 +1,8 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:converters="clr-namespace:SwapiMaui.Converters"
-             x:Class="SwapiMaui.MainPage">
+             x:Class="SwapiMaui.MainPage"
+             BackgroundColor="#F4F6F9">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -11,95 +10,89 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <Grid RowDefinitions="Auto,*" ColumnDefinitions="*"
-          Margin="12 ,89,0,0">
+    <Grid RowDefinitions="Auto,*" ColumnDefinitions="*" Margin="12,45,12,0">
+
         <Grid Grid.Row="0" ColumnDefinitions="*,Auto">
-            <Border Stroke="LightGray"
-                    StrokeShape="RoundRectangle 8"
+            <Border StrokeShape="RoundRectangle 8" 
+                    StrokeThickness="0" 
                     BackgroundColor="White"
-                    HeightRequest="40"
-                    WidthRequest="351"
+                    HeightRequest="40" 
+                    HorizontalOptions="FillAndExpand" 
                     Margin="0,0,0,12">
-
                 <Grid>
-                    <Entry Placeholder="Search people"
-                           Text="{Binding SearchText}"
+                    <Entry Placeholder="Search people" 
+                           Text="{Binding SearchText}" 
                            PlaceholderColor="#8E95A4"
-                           TextColor="Black"
-                           BackgroundColor="Transparent"
-                           FontSize="16"
-                           HorizontalOptions="FillAndExpand"
+                           TextColor="Black" 
+                           FontSize="14" 
+                           HorizontalOptions="FillAndExpand" 
                            VerticalOptions="Center" />
-
-
-                    <Image Source="search_icon.png"
-                           Aspect="AspectFit"
-                           HeightRequest="20"
+                    <Image Source="search_icon.png" 
+                           Aspect="AspectFit" 
+                           HeightRequest="20" 
                            WidthRequest="20"
-                           VerticalOptions="Center"
-                           HorizontalOptions="End"
+                           VerticalOptions="Center" 
+                           HorizontalOptions="End" 
                            Margin="0,0,10,0" />
                 </Grid>
             </Border>
         </Grid>
 
-        <CollectionView ItemsSource="{Binding People}" Grid.Row="1">
+        <CollectionView x:Name="PeopleCollection" ItemsSource="{Binding People}" Grid.Row="1">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Border Stroke="LightGray"
-                            StrokeThickness="1"
-                            StrokeShape="RoundRectangle 8"
-                            BackgroundColor="#FFFFFF"
-                            WidthRequest="351"
-                            HeightRequest="68"
-                            Margin="0,0,0,12"
+                    <Border StrokeShape="RoundRectangle 8" 
+                            BackgroundColor="#FFFFFF" 
+                            StrokeThickness="0"
+                            HorizontalOptions="FillAndExpand" 
+                            HeightRequest="68" 
+                            Margin="0,0,0,12" 
                             Padding="12,8">
+                        
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding BindingContext.GoToDetailCommand, Source={x:Reference PeopleCollection}}"
+                                CommandParameter="{Binding .}" />
+                        </Border.GestureRecognizers>
 
                         <VerticalStackLayout Spacing="4">
-
-                           
                             <HorizontalStackLayout VerticalOptions="Center" Spacing="8">
-                                <Label Text="{Binding Name}"
-                                       FontFamily="OpenSansSemiBold"
+                                <Label Text="{Binding Name}" 
+                                       FontFamily="OpenSansSemiBold" 
                                        FontSize="14"
-                                       TextColor="#333333"
+                                       TextColor="#333333" 
                                        VerticalOptions="Center" />
-
                                 <Image Source="{Binding Gender, Converter={StaticResource GenderToImageConverter}}"
-                                       WidthRequest="24"
+                                       WidthRequest="24" 
                                        HeightRequest="24"
                                        VerticalOptions="Center" />
                             </HorizontalStackLayout>
 
-                           
                             <HorizontalStackLayout VerticalOptions="Center" Spacing="16">
-
                                 <HorizontalStackLayout Spacing="4" VerticalOptions="Center">
-                                    <Image Source="height_icon.png"
-                                           WidthRequest="24"
+                                    <Image Source="height_icon.png" 
+                                           WidthRequest="24" 
                                            HeightRequest="24"
                                            VerticalOptions="Center" />
-                                    <Label Text="{Binding Height}"
-                                           FontSize="14"
+                                    <Label Text="{Binding Height}" 
+                                           FontSize="14" 
                                            TextColor="#5F6673"
-                                           FontFamily="OpenSansSemiBold"
+                                           FontFamily="OpenSansSemiBold" 
                                            VerticalOptions="Center" />
                                 </HorizontalStackLayout>
 
                                 <HorizontalStackLayout Spacing="4" VerticalOptions="Center">
-                                    <Image Source="weight_icon.png"
-                                           WidthRequest="24"
+                                    <Image Source="weight_icon.png" 
+                                           WidthRequest="24" 
                                            HeightRequest="24"
                                            VerticalOptions="Center" />
-                                    <Label Text="{Binding Mass}"
-                                           FontSize="14"
+                                    <Label Text="{Binding Mass}" 
+                                           FontSize="14" 
                                            TextColor="#5F6673"
-                                           FontFamily="OpenSansSemiBold"
+                                           FontFamily="OpenSansSemiBold" 
                                            VerticalOptions="Center" />
                                 </HorizontalStackLayout>
-
                             </HorizontalStackLayout>
-
                         </VerticalStackLayout>
                     </Border>
                 </DataTemplate>

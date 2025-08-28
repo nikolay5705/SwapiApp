@@ -1,8 +1,10 @@
 ﻿using System.Collections.ObjectModel;
+using System.Windows.Input;
 using SWAPI.DataManager.People;
 using SWAPI.Mappers;
 using SWAPI.Models;
 using SWAPI.Models.Entities;
+using SwapiMaui.Pages;
 
 namespace SwapiMaui.ViewModels;
 
@@ -17,10 +19,20 @@ public class MainViewModel : ViewModelBase
     public MainViewModel(IPeopleManager peopleManager)
     {
         _peopleManager = peopleManager;
+        GoToDetailCommand = new Command<PersonItemViewModel>(async person =>
+        {
+            if (person == null)
+                return;
+            var detailPage = new PersonDetailPage(new PersonDetailViewModel(person));
+            await Application.Current.MainPage.Navigation.PushAsync(detailPage);
+        });
+
         OnNavigatedTo();
     }
 
     public ObservableCollection<PersonItemViewModel> People { get; } = new();
+
+    public ICommand GoToDetailCommand { get; }
 
     public string SearchText
     {
