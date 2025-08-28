@@ -6,19 +6,26 @@ namespace SwapiMaui.ViewModels;
 
 public class PersonDetailViewModel : ViewModelBase
 {
-    private readonly IPeopleManager _peopleManager;
-
-    public PersonDetailViewModel(IPeopleManager peopleManager, string personId)
+    public PersonDetailViewModel(PersonItemViewModel person)
     {
-        _peopleManager = peopleManager;
-        LoadPerson(personId);
+        SelectedPerson = person;
     }
 
-    public PersonItemViewModel SelectedPerson { get; set; }
+    public PersonItemViewModel SelectedPerson { get; }
 
-    private async void LoadPerson(string personId)
-    {
-        var details = await _peopleManager.GetPeopleDetailsAsync(personId);
-        SelectedPerson = new PersonItemViewModel(details.ToModel());
-    }
+    // private readonly IPeopleManager _peopleManager;
+    //
+    // public PersonDetailViewModel(IPeopleManager peopleManager, string personId)
+    // {
+    //     _peopleManager = peopleManager;
+    //     LoadPerson(personId);
+    // }
+    //
+    // public PersonItemViewModel SelectedPerson { get; set; }
+    //
+    // private async void LoadPerson(string personId)
+    // {
+    //     var details = await _peopleManager.GetPeopleDetailsAsync(personId);
+    //     SelectedPerson = new PersonItemViewModel(details.ToModel());
+    // }
 }

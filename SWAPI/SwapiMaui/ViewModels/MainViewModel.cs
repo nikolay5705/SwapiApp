@@ -23,7 +23,7 @@ public class MainViewModel : ViewModelBase
         {
             if (person == null)
                 return;
-            var detailPage = new PersonDetailPage(new PersonDetailViewModel(_peopleManager, person.Id));
+            var detailPage = new PersonDetailPage(new PersonDetailViewModel(person));
             await Application.Current.MainPage.Navigation.PushAsync(detailPage);
         });
 

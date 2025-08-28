@@ -4,6 +4,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SwapiMaui.Pages.PersonDetailPage">
     <VerticalStackLayout Padding="20">
-        <Label Text="{Binding Name}" FontSize="24" HorizontalOptions="Center" />
+        <Label Text="{Binding SelectedPerson.Name}" FontSize="24" HorizontalOptions="Center" />
     </VerticalStackLayout>
 </ContentPage>
