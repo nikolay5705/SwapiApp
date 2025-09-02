@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SwapiMaui.ViewModels;
+﻿using SwapiMaui.ViewModels;
 
 namespace SwapiMaui.Pages;
 
@@ -13,5 +8,10 @@ public partial class PersonDetailPage : ContentPage
     {
         InitializeComponent();
         BindingContext = viewModel;
+    }
+
+    private async void OnBackClicked(object sender, EventArgs e)
+    {
+        await Navigation.PopAsync();
     }
 }

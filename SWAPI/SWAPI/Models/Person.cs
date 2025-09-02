@@ -12,5 +12,9 @@ public class Person
 
     public string Mass { get; set; } = string.Empty;
 
+    public string SkinColor { get; set; } = string.Empty;
+
+    public string EyeColor { get; set; } = string.Empty;
+
     public string Id { get; set; } = string.Empty;
 }

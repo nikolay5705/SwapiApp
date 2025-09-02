@@ -15,7 +15,9 @@ public static class PersonDetailsMapper
             Gender = personDto.Gender,
             Mass = personDto.Mass,
             Height = personDto.Height,
-            BirthYear = personDto.BirthYear
+            BirthYear = personDto.BirthYear,
+            SkinColor = personDto.SkinColor,
+            EyeColor = personDto.EyeColor,
         };
     }
 
@@ -29,6 +31,8 @@ public static class PersonDetailsMapper
             Mass = personEntity.Mass,
             Height = personEntity.Height,
             BirthYear = personEntity.BirthYear,
+            SkinColor = personEntity.SkinColor,
+            EyeColor = personEntity.EyeColor,
         };
     }
 
@@ -42,6 +46,8 @@ public static class PersonDetailsMapper
             Mass = personDetails.Mass,
             Height = personDetails.Height,
             BirthYear = personDetails.BirthYear,
+            SkinColor = personDetails.SkinColor,
+            EyeColor = personDetails.EyeColor,
         };
     }
 
@@ -53,7 +59,9 @@ public static class PersonDetailsMapper
             Gender = personDetailsDto.Gender,
             Mass = personDetailsDto.Mass,
             Height = personDetailsDto.Height,
-            BirthYear = personDetailsDto.BirthYear
+            BirthYear = personDetailsDto.BirthYear,
+            SkinColor = personDetailsDto.SkinColor,
+            EyeColor = personDetailsDto.SkinColor,
         };
     }
 

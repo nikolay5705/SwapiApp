@@ -1,31 +1,33 @@
-﻿using SWAPI.DataManager.People;
-using SWAPI.Mappers;
-using SWAPI.Models;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using SWAPI.DataManager.People;
 
 namespace SwapiMaui.ViewModels;
 
 public class PersonDetailViewModel : ViewModelBase
 {
-    public PersonDetailViewModel(PersonItemViewModel person)
+    private readonly IPeopleManager _peopleManager;
+
+    public PersonDetailViewModel(string personId, IPeopleManager peopleManager)
     {
-        SelectedPerson = person;
+        _peopleManager = peopleManager;
+        SelectedPersonId = personId;
+        OnNavigatedTo();
     }
 
-    public PersonItemViewModel SelectedPerson { get; }
+    public PersonItemViewModel SelectedPerson { get; set; }
 
-    // private readonly IPeopleManager _peopleManager;
-    //
-    // public PersonDetailViewModel(IPeopleManager peopleManager, string personId)
-    // {
-    //     _peopleManager = peopleManager;
-    //     LoadPerson(personId);
-    // }
-    //
-    // public PersonItemViewModel SelectedPerson { get; set; }
-    //
-    // private async void LoadPerson(string personId)
-    // {
-    //     var details = await _peopleManager.GetPeopleDetailsAsync(personId);
-    //     SelectedPerson = new PersonItemViewModel(details.ToModel());
-    // }
+    private string SelectedPersonId { get; } = string.Empty;
+
+    protected override async Task InitializeAsync()
+    {
+        try
+        {
+            var detailsAboutPerson = await _peopleManager.GetPeopleDetailsAsync(SelectedPersonId);
+            SelectedPerson = new PersonItemViewModel(detailsAboutPerson);
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine(ex.Message);
+        }
+    }
 }

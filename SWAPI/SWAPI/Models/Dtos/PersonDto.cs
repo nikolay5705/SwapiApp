@@ -15,5 +15,13 @@ public class PersonDto
 
     public string Mass { get; set; } = string.Empty;
 
+    [JsonPropertyName("skin_color")]
+    public string SkinColor { get; set; } = string.Empty;
+
+    [JsonPropertyName("eye_color")]
+    public string EyeColor { get; set; } = string.Empty;
+
     public string Url { get; set; } = string.Empty;
+
+    public string Id { get; set; } = string.Empty;
 }

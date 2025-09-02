@@ -12,12 +12,16 @@ public class PersonDetailsDto
 
     public string HairColor { get; set; } = string.Empty;
 
+    [JsonPropertyName("skin_color")]
     public string SkinColor { get; set; } = string.Empty;
 
+    [JsonPropertyName("eye_color")]
     public string EyeColor { get; set; } = string.Empty;
 
     public string Gender { get; set; } = string.Empty;
 
     [JsonPropertyName("birth_year")]
     public string BirthYear { get; set; } = string.Empty;
+
+    public string Id { get; set; } = string.Empty;
 }

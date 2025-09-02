@@ -23,7 +23,7 @@ public class MainViewModel : ViewModelBase
         {
             if (person == null)
                 return;
-            var detailPage = new PersonDetailPage(new PersonDetailViewModel(person));
+            var detailPage = new PersonDetailPage(new PersonDetailViewModel(person.Id, _peopleManager));
             await Application.Current.MainPage.Navigation.PushAsync(detailPage);
         });
 
@@ -62,6 +62,7 @@ public class MainViewModel : ViewModelBase
 
                 foreach (var person in _allPeople)
                     People.Add(person);
+                bool flag = true;
             }
         }
         catch (Exception ex)
