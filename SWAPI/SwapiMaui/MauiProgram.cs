@@ -39,12 +39,11 @@ public static class MauiProgram
         builder.Services.AddSingleton<IRepository<PlanetEntity>, MemoryRepository<PlanetEntity>>();
         builder.Services.AddSingleton<IRepository<StarshipEntity>, MemoryRepository<StarshipEntity>>();
 
-        // ViewModels
-        builder.Services.AddSingleton<MainViewModel>();
-        builder.Services.AddTransient<PersonDetailViewModel>();
-
-        // Pages
         builder.Services.AddSingleton<MainPage>();
+        builder.Services.AddSingleton<MainViewModel>();
+
+        builder.Services.AddSingleton<PersonDetailPage>();
+        builder.Services.AddSingleton<PersonDetailViewModel>();
 
 #if DEBUG
         builder.Logging.AddDebug();

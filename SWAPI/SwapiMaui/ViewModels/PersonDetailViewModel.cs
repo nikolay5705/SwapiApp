@@ -1,4 +1,6 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using System.Collections.ObjectModel;
+using System.Diagnostics;
+using CommunityToolkit.Mvvm.ComponentModel;
 using SWAPI.DataManager.People;
 
 namespace SwapiMaui.ViewModels;
@@ -18,16 +20,31 @@ public class PersonDetailViewModel : ViewModelBase
 
     private string SelectedPersonId { get; } = string.Empty;
 
+    public string Height { get; set; } = string.Empty;
+
+    public string Name { get; set; } = string.Empty;
+
+    public string Mass { get; set; } = string.Empty;
+
+    public string SkinColor { get; set; } = string.Empty;
+
+    public string EyeColor { get; set; } = string.Empty;
+
     protected override async Task InitializeAsync()
     {
         try
         {
             var detailsAboutPerson = await _peopleManager.GetPeopleDetailsAsync(SelectedPersonId);
             SelectedPerson = new PersonItemViewModel(detailsAboutPerson);
+            Height = SelectedPerson.Height;
+            Name = SelectedPerson.Name;
+            Mass = SelectedPerson.Mass;
+            SkinColor = SelectedPerson.SkinColor;
+            EyeColor = SelectedPerson.EyeColor;
         }
         catch (Exception ex)
         {
-            System.Diagnostics.Debug.WriteLine(ex.Message);
+            Debug.WriteLine(ex.Message);
         }
     }
 }

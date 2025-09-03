@@ -20,7 +20,7 @@
                 <ImageButton Source="back_icon.png"
                              Padding="13"
                              Clicked="OnBackClicked" />
-                <Label Text="{Binding SelectedPerson.Name}"
+                <Label Text="{Binding  Name}"
                        FontSize="16"
                        TextColor="#333333"
                        VerticalOptions="Center"
@@ -42,7 +42,7 @@
                        FontFamily="OpenSansSemiBold"
                        VerticalOptions="Center" />
                 
-                <Label Text="{Binding SelectedPerson.Height}"
+                <Label Text="{Binding Height}"
                        FontSize="14"
                        TextColor="#000000"
                        FontFamily="OpenSansSemiBold"
@@ -61,7 +61,7 @@
                        FontFamily="OpenSansSemiBold"
                        VerticalOptions="Center" />
                 
-                <Label Text="{Binding SelectedPerson.Mass}"
+                <Label Text="{Binding Mass}"
                        FontSize="14"
                        TextColor="#000000"
                        FontFamily="OpenSansSemiBold"
@@ -72,7 +72,7 @@
                 
                 <Ellipse WidthRequest="24"
                          HeightRequest="24"
-                         Fill="{Binding SelectedPerson.SkinColor, Converter={StaticResource StringToColorConverter}}"/>
+                         Fill="{Binding SkinColor, Converter={StaticResource StringToColorConverter}}"/>
                 
                 <Label Text="Skin color:"
                        FontSize="14"
@@ -80,7 +80,7 @@
                        FontFamily="OpenSansSemiBold"
                        VerticalOptions="Center" />
 
-                <Label Text="{Binding SelectedPerson.SkinColor}"
+                <Label Text="{Binding SkinColor}"
                        FontSize="14"
                        TextColor="#000000"
                        FontFamily="OpenSansSemiBold"
@@ -92,7 +92,7 @@
                 
                 <Ellipse WidthRequest="24"
                          HeightRequest="24"
-                         Fill="{Binding SelectedPerson.EyeColor, Converter={StaticResource StringToColorConverter}}"/>
+                         Fill="{Binding EyeColor, Converter={StaticResource StringToColorConverter}}"/>
                 
                 <Label Text="Eye color:"
                        FontSize="14"
@@ -100,7 +100,7 @@
                        FontFamily="OpenSansSemiBold"
                        VerticalOptions="Center" />
 
-                <Label Text="{Binding SelectedPerson.EyeColor}"
+                <Label Text="{Binding EyeColor}"
                        FontSize="14"
                        TextColor="#000000"
                        FontFamily="OpenSansSemiBold"
@@ -121,11 +121,11 @@
                        FontFamily="OpenSansSemiBold"
                        VerticalOptions="Center" />
 
-                <Label Text="{Binding SelectedPerson.EyeColor}"
-                       FontSize="14"
-                       TextColor="#000000"
-                       FontFamily="OpenSansSemiBold"
-                       VerticalOptions="Center" />
+                <!-- <Label Text="{Binding Mass}" -->
+                <!--        FontSize="14" -->
+                <!--        TextColor="#000000" -->
+                <!--        FontFamily="OpenSansSemiBold" -->
+                <!--        VerticalOptions="Center" /> -->
 
             </HorizontalStackLayout>
             
@@ -142,11 +142,11 @@
                        FontFamily="OpenSansSemiBold"
                        VerticalOptions="Center" />
 
-                <Label Text="{Binding SelectedPerson.EyeColor}"
-                       FontSize="14"
-                       TextColor="#000000"
-                       FontFamily="OpenSansSemiBold"
-                       VerticalOptions="Center" />
+                <!-- <Label Text="{Binding Mass}" -->
+                <!--        FontSize="14" -->
+                <!--        TextColor="#000000" -->
+                <!--        FontFamily="OpenSansSemiBold" -->
+                <!--        VerticalOptions="Center" /> -->
 
             </HorizontalStackLayout>
             
