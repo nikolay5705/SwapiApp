@@ -23,5 +23,7 @@ public class PersonDetailsDto
     [JsonPropertyName("birth_year")]
     public string BirthYear { get; set; } = string.Empty;
 
+    public string Homeworld { get; set; } = string.Empty;
+
     public string Id { get; set; } = string.Empty;
 }

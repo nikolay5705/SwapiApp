@@ -121,17 +121,21 @@
                        FontFamily="OpenSansSemiBold"
                        VerticalOptions="Center" />
 
-                <!-- <Label Text="{Binding Mass}" -->
-                <!--        FontSize="14" -->
-                <!--        TextColor="#000000" -->
-                <!--        FontFamily="OpenSansSemiBold" -->
-                <!--        VerticalOptions="Center" /> -->
+                <Label Text="{Binding Homeworld}"
+                       FontSize="14"
+                       TextColor="#000000"
+                       FontFamily="OpenSansSemiBold"
+                       VerticalOptions="Center" />
+                
+                <ImageButton Source="next_icon.png"
+                             Padding="13"
+                             Clicked="OnNextClicked" />
 
             </HorizontalStackLayout>
             
             <HorizontalStackLayout BackgroundColor="#F4F6F9" HeightRequest="44" Spacing="12">
                 
-                <Image Source="home_world_climat_icon.png"
+                <Image Source="climate_icon.png"
                        WidthRequest="24"
                        HeightRequest="24"
                        VerticalOptions="Center" />
@@ -142,11 +146,11 @@
                        FontFamily="OpenSansSemiBold"
                        VerticalOptions="Center" />
 
-                <!-- <Label Text="{Binding Mass}" -->
-                <!--        FontSize="14" -->
-                <!--        TextColor="#000000" -->
-                <!--        FontFamily="OpenSansSemiBold" -->
-                <!--        VerticalOptions="Center" /> -->
+                <Label Text="{Binding Climate}"
+                       FontSize="14"
+                       TextColor="#000000"
+                       FontFamily="OpenSansSemiBold"
+                       VerticalOptions="Center" />
 
             </HorizontalStackLayout>
             

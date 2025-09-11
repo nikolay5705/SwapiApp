@@ -25,6 +25,7 @@ public class PersonItemViewModel
         SkinColor = personDetails.SkinColor.Split(",").FirstOrDefault();
         EyeColor = personDetails.EyeColor.Split(",").FirstOrDefault();
         Id = personDetails.Id;
+        HomeWorldId = SWAPI.Utils.Utils.ExtractIdFromUrl(personDetails.Homeworld);
     }
 
     public string Name { get; set; } = string.Empty;
@@ -42,4 +43,10 @@ public class PersonItemViewModel
     public string Id { get; set; } = string.Empty;
 
     public string GenderImage { get; set; } = string.Empty;
+
+    public string HomeWorldId { get; set; } = string.Empty;
+
+    public string Homeworld { get; set; } = string.Empty;
+
+    public string Climate { get; set; } = string.Empty;
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
 using SWAPI.DataManager.People;
+using SWAPI.DataManager.Planets;
 using SWAPI.Mappers;
 using SWAPI.Models;
 using SWAPI.Models.Entities;
@@ -12,18 +13,22 @@ public class MainViewModel : ViewModelBase
 {
     private readonly IPeopleManager _peopleManager;
 
+    private readonly IPlanetsManager _planetsManager;
+
     private string _searchText = string.Empty;
 
     private List<PersonItemViewModel> _allPeople = new();
 
-    public MainViewModel(IPeopleManager peopleManager)
+    public MainViewModel(IPeopleManager peopleManager, IPlanetsManager planetsManager)
     {
         _peopleManager = peopleManager;
+        _planetsManager = planetsManager;
         GoToDetailCommand = new Command<PersonItemViewModel>(async person =>
         {
             if (person == null)
                 return;
-            var detailPage = new PersonDetailPage(new PersonDetailViewModel(person.Id, _peopleManager));
+            var detailPage =
+                new PersonDetailPage(new PersonDetailViewModel(person.Id, _peopleManager, _planetsManager));
             await Application.Current.MainPage.Navigation.PushAsync(detailPage);
         });
 

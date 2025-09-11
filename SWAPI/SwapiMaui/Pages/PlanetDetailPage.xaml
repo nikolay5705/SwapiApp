@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SwapiMaui.Pages.PlanetDetailPage"
+             Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,*">
+
+        <Grid BackgroundColor="White">
+
+            <HorizontalStackLayout>
+                <ImageButton Source="back_icon.png"
+                             Padding="13"
+                             Clicked="OnBackClicked" />
+                <Label Text="{Binding Homeworld}"
+                       FontSize="16"
+                       TextColor="#333333"
+                       VerticalOptions="Center"
+                       Margin="-12,0,0,0" />
+            </HorizontalStackLayout>
+        </Grid>
+        <VerticalStackLayout BackgroundColor="#F4F6F9" Grid.Row="1" Spacing="12" Padding="12,19,12,0">
+
+            <HorizontalStackLayout BackgroundColor="#F4F6F9" HeightRequest="44" Spacing="12">
+                <Image Source="home_world_icon.png"
+                       WidthRequest="24"
+                       HeightRequest="24"
+                       VerticalOptions="Center" />
+
+                <Label Text="Rotation period:"
+                       FontSize="14"
+                       TextColor="#000000"
+                       FontFamily="OpenSansSemiBold"
+                       VerticalOptions="Center" />
+
+                <!-- <Label Text="{Binding RotationPeriod}" -->
+                <!--        FontSize="14" -->
+                <!--        TextColor="#000000" -->
+                <!--        FontFamily="OpenSansSemiBold" -->
+                <!--        VerticalOptions="Center" /> -->
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout BackgroundColor="#F4F6F9" HeightRequest="44" Spacing="12">
+
+                <Image Source="diameter_icon.png"
+                       WidthRequest="24"
+                       HeightRequest="24"
+                       VerticalOptions="Center" />
+
+                <Label Text="Diameter:"
+                       FontSize="14"
+                       TextColor="#000000"
+                       FontFamily="OpenSansSemiBold"
+                       VerticalOptions="Center" />
+
+                <!-- <Label Text="{Binding Diameter}" -->
+                <!--        FontSize="14" -->
+                <!--        TextColor="#000000" -->
+                <!--        FontFamily="OpenSansSemiBold" -->
+                <!--        VerticalOptions="Center" /> -->
+
+            </HorizontalStackLayout>
+            
+            <HorizontalStackLayout BackgroundColor="#F4F6F9" HeightRequest="44" Spacing="12">
+
+                <Image Source="climate_icon.png"
+                       WidthRequest="24"
+                       HeightRequest="24"
+                       VerticalOptions="Center" />
+
+                <Label Text="Climate:"
+                       FontSize="14"
+                       TextColor="#000000"
+                       FontFamily="OpenSansSemiBold"
+                       VerticalOptions="Center" />
+
+                <!-- <Label Text="{Binding Climate}" -->
+                <!--        FontSize="14" -->
+                <!--        TextColor="#000000" -->
+                <!--        FontFamily="OpenSansSemiBold" -->
+                <!--        VerticalOptions="Center" /> -->
+
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout BackgroundColor="#F4F6F9" HeightRequest="44" Spacing="12">
+
+                <Image Source="surface_icon.png"
+                       WidthRequest="24"
+                       HeightRequest="24"
+                       VerticalOptions="Center" />
+
+                <Label Text="Surface:"
+                       FontSize="14"
+                       TextColor="#000000"
+                       FontFamily="OpenSansSemiBold"
+                       VerticalOptions="Center" />
+
+                <!-- <Label Text="{Binding Surface}" -->
+                <!--        FontSize="14" -->
+                <!--        TextColor="#000000" -->
+                <!--        FontFamily="OpenSansSemiBold" -->
+                <!--        VerticalOptions="Center" /> -->
+
+            </HorizontalStackLayout>
+            <HorizontalStackLayout BackgroundColor="#F4F6F9" HeightRequest="44" Spacing="12" Padding="10">
+                <Label Text="Residents:"
+                       FontSize="14"
+                       TextColor="#000000"
+                       FontFamily="OpenSansSemiBold"
+                       VerticalOptions="Center" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

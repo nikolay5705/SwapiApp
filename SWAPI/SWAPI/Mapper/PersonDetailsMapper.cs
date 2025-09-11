@@ -76,7 +76,8 @@ public static class PersonDetailsMapper
             Mass = personDetailsDto.Mass,
             HairColor = personDetailsDto.HairColor,
             SkinColor = personDetailsDto.SkinColor,
-            EyeColor = personDetailsDto.EyeColor
+            EyeColor = personDetailsDto.EyeColor,
+            Homeworld = personDetailsDto.Homeworld,
         };
     }
 }

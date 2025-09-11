@@ -19,4 +19,6 @@ public class PersonDetails
     public string Gender { get; set; } = string.Empty;
 
     public string BirthYear { get; set; } = string.Empty;
+
+    public string Homeworld { get; set; } = string.Empty;
 }

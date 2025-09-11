@@ -1,4 +1,11 @@
-﻿namespace SwapiMaui;
+﻿using SWAPI.Caching;
+using SWAPI.DataManager.People;
+using SWAPI.Models.Entities;
+using SWAPI.Services.People;
+using SWAPI.Services.Requests;
+using SwapiMaui.ViewModels;
+
+namespace SwapiMaui;
 
 public partial class App : Application
 {
